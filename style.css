@@ -1,0 +1,103 @@
+body {
+    background-color: #ebebeb;
+    color: #333333;
+    font-size: 12px;
+    font-family: "Proxima Nova", -apple-system, Roboto, Arial, sans-serif, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* ======= Banner ======= */
+  .banner {
+    text-align: center;
+    background-color: #ebebeb;
+    padding: 20px 0;
+  }
+  
+  .banner img {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .dots {
+    margin-top: 10px;
+  }
+  
+  .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 4px;
+    background-color: #999;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .dot.active {
+    background-color: #333333;
+  }
+  
+  /* ======= Cards ======= */
+  .produtos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    width: 200px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card img {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .info {
+    padding: 10px;
+  }
+  
+  .info h3 {
+    font-size: 14px;
+    color: #333333;
+    margin: 5px 0;
+  }
+  
+  .info .descricao {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .info .preco {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+    margin-top: 5px;
+  }
+  
+  .icon-carrinho {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 22px;
+    color: #3aa655;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .icon-carrinho:hover {
+    transform: scale(1.1);
+  }
+  
