@@ -73,7 +73,7 @@ class Banner {
   
       const icon = document.createElement("div");
       icon.classList.add("icon-carrinho");
-      icon.textContent = "🛒➕";
+      icon.innerHTML = '<img src="images/checkout_add.png" alt="Carrinho de Compras" />';
   
       info.appendChild(h3);
       info.appendChild(pDesc);
