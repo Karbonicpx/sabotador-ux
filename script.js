@@ -178,3 +178,9 @@ document.getElementById("produtos-area").appendChild(produtosArea);
 
 const meuFooter = new Footer();
 document.getElementById("footer").appendChild(meuFooter.render());
+
+
+function finalizarTarefa() {
+  localStorage.setItem("fimTarefa", Date.now());
+  window.close();
+}
