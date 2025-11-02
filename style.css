@@ -7,6 +7,7 @@
   --font-family: "Proxima Nova", -apple-system, Roboto, Arial, sans-serif,
     sans-serif;
 }
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -15,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 /* ======= Barra de navegação ======= */
 .navbar {
   display: flex;
@@ -56,6 +58,7 @@ body {
 .home_logo img {
   height: 70px;
 }
+
 .search-bar img {
   width: 25px;
   height: 25px;
@@ -107,6 +110,42 @@ body {
 .dot.active {
   background-color: #333333;
 }
+
+/* ======= Footer ======= */
+
+.footer {
+  background-color: #131a22;
+  color: #ddd;
+  font-size: 13px;
+  text-align: center;
+  padding: 20px 10px;
+  line-height: 1.6;
+}
+
+.footer a {
+  color: #ddd;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer .footer-links {
+  margin-bottom: 10px;
+}
+
+.footer .footer-company {
+  color: #ccc;
+  font-size: 12px;
+}
+
+.footer .footer-address {
+  color: #bbb;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
 
 /* ======= Cards ======= */
 .produtos {
@@ -171,4 +210,19 @@ body {
 
 .icon-carrinho:hover {
   transform: scale(1.2);
+}
+
+/* ======= Botão Finalizar Tarefa ======= */
+#btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
