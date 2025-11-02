@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela de Busca - Sabotador UX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo"> Pesquisa </div>
+    <input type="text" id="searchBar" placeholder="Buscar produtos...">
+  </header>
+
+  <main>
+    <!-- Filtros -->
+    <aside id="filtros">
+      <h2>Filtros</h2>
+      
+      <div class="filtro">
+        <h3>Categoria</h3>
+        <label><input type="checkbox" value="Mouse" class="filtro-categoria"> Mouse</label>
+        <label><input type="checkbox" value="Teclado" class="filtro-categoria"> Teclado</label>
+        <label><input type="checkbox" value="Fone" class="filtro-categoria"> Fone</label>
+      </div>
+
+      <div class="filtro">
+        <h3>Marca</h3>
+        <label><input type="checkbox" value="Logitech" class="filtro-marca"> Logitech</label>
+        <label><input type="checkbox" value="Redragon" class="filtro-marca"> Redragon</label>
+        <label><input type="checkbox" value="Razer" class="filtro-marca"> Razer</label>
+      </div>
+
+      <div class="filtro">
+        <h3>RGB</h3>
+        <label><input type="checkbox" value="Sim" class="filtro-rgb"> Sim</label>
+        <label><input type="checkbox" value="Não" class="filtro-rgb"> Não</label>
+      </div>
+
+      <div class="filtro">
+        <h3>Cor</h3>
+        <label><input type="checkbox" value="Preto" class="filtro-cor"> Preto</label>
+        <label><input type="checkbox" value="Branco" class="filtro-cor"> Branco</label>
+        <label><input type="checkbox" value="Cinza" class="filtro-cor"> Cinza</label>
+      </div>
+
+      <div class="filtro">
+        <h3>Avaliação</h3>
+        <label><input type="checkbox" value="4" class="filtro-avaliacao"> ★★★★+</label>
+        <label><input type="checkbox" value="3" class="filtro-avaliacao"> ★★★+</label>
+      </div>
+    </aside>
+
+    <!-- Grid de Produtos -->
+    <section id="produtos-grid"></section>
+  </main>
+  <script src="search.js"></script>
+</body>
+</html>

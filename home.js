@@ -34,16 +34,22 @@ class Banner {
       return section;
     }
   }
+
+// =========================
+// CLASSE: CardProduto
+// =========================
   
-  // =========================
-  // CLASSE: CardProduto
-  // =========================
   class CardProduto {
-    constructor({ nome, descricao, preco, imagem, largura = "200px", altura = "150px" }) {
+    constructor({ nome, descricao, preco, imagem, categoria, marca, rgb, cor, avaliacao, largura = "200px", altura = "150px" }) {
       this.nome = nome;
       this.descricao = descricao;
       this.preco = preco;
       this.imagem = imagem;
+      this.categoria = categoria;
+      this.marca = marca;
+      this.rgb = rgb;
+      this.cor = cor;
+      this.avaliacao = avaliacao;
       this.largura = largura;
       this.altura = altura;
     }
@@ -100,33 +106,37 @@ class Banner {
   });
   
   document.getElementById("banner-area").appendChild(meuBanner.render());
-  
-  // Produtos usando imagens locais
-  const produtos = [
-    new CardProduto({
-      nome: "Mouse Gamer",
-      descricao: "Alta precisão e RGB",
-      preco: "R$ 199,90",
-      imagem: "images/Mouse Gamer.png"
-    }),
-    new CardProduto({
-      nome: "Headset Gamer",
-      descricao: "Som Surround 7.1",
-      preco: "R$ 349,99",
-      imagem: "images/Headset Gamer.png"
-    }),
-    new CardProduto({
-      nome: "Teclado Gamer",
-      descricao: "Mecânico e RGB",
-      preco: "R$ 299,99",
-      imagem: "images/Teclado Gamer.png"
-    })
-  ];
-  
-  const produtosArea = document.createElement("div");
-  produtosArea.classList.add("produtos");
-  
-  produtos.forEach(p => produtosArea.appendChild(p.render()));
-  
+
+// =========================
+// CARREGAR PRODUTOS DO JSON EXTERNO
+// =========================
+
+fetch("produtos.json")
+.then(response => {
+  if (!response.ok) throw new Error("Arquivo JSON não encontrado");
+  return response.json();
+})
+.then(data => {
+  renderizarProdutos(data.dados);
+})
+.catch(error => {
+  console.warn(" Usando dados locais por falha no JSON externo: ", error.message);
+  renderizarProdutos(dadosJSON.dados);
+});
+
+// =========================
+// FUNÇÃO: RENDERIZAR PRODUTOS
+// =========================
+function renderizarProdutos(listaProdutos) {
+const produtosArea = document.createElement("div");
+produtosArea.classList.add("produtos");
+
+listaProdutos.forEach(item => {
+  const card = new CardProduto(item);
+  produtosArea.appendChild(card.render());
+});
+
+document.getElementById("produtos-area").appendChild(produtosArea);
   document.getElementById("produtos-area").appendChild(produtosArea);
+}
   

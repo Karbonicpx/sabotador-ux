@@ -1,0 +1,335 @@
+{
+    "dados": [
+      {
+        "nome": "Mouse Gamer Cobra",
+        "descricao": "Alta precisão, RGB e 7200 DPI",
+        "preco": "R$ 199,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Redragon",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Headset Logitech G733",
+        "descricao": "Som Surround e microfone com filtro de ruído",
+        "preco": "R$ 749,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Logitech",
+        "rgb": "Sim",
+        "cor": "Branco",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Teclado Razer BlackWidow",
+        "descricao": "Switch mecânico verde e iluminação RGB",
+        "preco": "R$ 999,99",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Mouse Logitech G203",
+        "descricao": "Sensor HERO e 8000 DPI",
+        "preco": "R$ 179,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Logitech",
+        "rgb": "Sim",
+        "cor": "Branco",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Teclado Redragon Kumara",
+        "descricao": "Mecânico com iluminação vermelha",
+        "preco": "R$ 289,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Redragon",
+        "rgb": "Não",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Headset Razer Kraken",
+        "descricao": "Som potente e conforto prolongado",
+        "preco": "R$ 499,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Razer",
+        "rgb": "Não",
+        "cor": "Verde",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Mouse Razer Viper Mini",
+        "descricao": "Design leve com iluminação RGB",
+        "preco": "R$ 299,99",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Teclado Logitech G Pro X",
+        "descricao": "Switches mecânicos intercambiáveis",
+        "preco": "R$ 899,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Logitech",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Headset Redragon Zeus",
+        "descricao": "Som estéreo e microfone removível",
+        "preco": "R$ 279,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Redragon",
+        "rgb": "Não",
+        "cor": "Cinza",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Mouse Redragon Griffin",
+        "descricao": "Alta precisão com 7200 DPI e RGB",
+        "preco": "R$ 159,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Redragon",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Teclado Razer Cynosa V2",
+        "descricao": "Teclado gamer com iluminação personalizável",
+        "preco": "R$ 429,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Headset Redragon Lamia",
+        "descricao": "Drivers de 50mm com som imersivo",
+        "preco": "R$ 229,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Redragon",
+        "rgb": "Não",
+        "cor": "Preto",
+        "avaliacao": 3
+      },
+      {
+        "nome": "Mouse Razer DeathAdder",
+        "descricao": "Design ergonômico e sensor óptico de alta precisão",
+        "preco": "R$ 399,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Teclado Logitech K845",
+        "descricao": "Teclado mecânico com design minimalista",
+        "preco": "R$ 379,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Logitech",
+        "rgb": "Não",
+        "cor": "Cinza",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Headset Razer BlackShark V2",
+        "descricao": "Som cristalino e isolamento de ruído",
+        "preco": "R$ 699,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Mouse Logitech G502 HERO",
+        "descricao": "Sensor HERO 25K com 11 botões programáveis",
+        "preco": "R$ 499,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Logitech",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Teclado Redragon Shiva",
+        "descricao": "Semi-mecânico com iluminação RGB",
+        "preco": "R$ 229,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Redragon",
+        "rgb": "Sim",
+        "cor": "Branco",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Headset Logitech G432",
+        "descricao": "Som Surround DTS e conforto extremo",
+        "preco": "R$ 449,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Logitech",
+        "rgb": "Não",
+        "cor": "Preto",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Mouse Redragon M607",
+        "descricao": "Alta precisão e design ergonômico",
+        "preco": "R$ 129,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Redragon",
+        "rgb": "Não",
+        "cor": "Cinza",
+        "avaliacao": 3
+      },
+      {
+        "nome": "Teclado Razer Ornata Chroma",
+        "descricao": "Teclas híbridas e iluminação RGB",
+        "preco": "R$ 599,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Headset Redragon Pandora",
+        "descricao": "Som claro e isolamento acústico",
+        "preco": "R$ 199,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Redragon",
+        "rgb": "Não",
+        "cor": "Branco",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Mouse Logitech M90",
+        "descricao": "Simples, durável e ergonômico",
+        "preco": "R$ 59,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Logitech",
+        "rgb": "Não",
+        "cor": "Cinza",
+        "avaliacao": 3
+      },
+      {
+        "nome": "Teclado Redragon Draconic",
+        "descricao": "60% compacto e wireless",
+        "preco": "R$ 419,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Redragon",
+        "rgb": "Sim",
+        "cor": "Branco",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Headset Razer Barracuda",
+        "descricao": "Sem fio com áudio de alta definição",
+        "preco": "R$ 999,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Cinza",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Mouse Redragon M607 RGB",
+        "descricao": "7200 DPI e 7 botões configuráveis",
+        "preco": "R$ 169,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Redragon",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Teclado Logitech G213",
+        "descricao": "Teclado gamer resistente a respingos",
+        "preco": "R$ 349,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Logitech",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 4
+      },
+      {
+        "nome": "Headset Redragon Scylla",
+        "descricao": "Conforto e leveza com som estéreo",
+        "preco": "R$ 179,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Redragon",
+        "rgb": "Não",
+        "cor": "Preto",
+        "avaliacao": 3
+      },
+      {
+        "nome": "Mouse Razer Basilisk",
+        "descricao": "Controle de sensibilidade ajustável",
+        "preco": "R$ 459,90",
+        "imagem": "images/Mouse Gamer.png",
+        "categoria": "Mouse",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Preto",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Teclado Razer Huntsman Mini",
+        "descricao": "Switch óptico e design compacto",
+        "preco": "R$ 699,90",
+        "imagem": "images/Teclado Gamer.png",
+        "categoria": "Teclado",
+        "marca": "Razer",
+        "rgb": "Sim",
+        "cor": "Branco",
+        "avaliacao": 5
+      },
+      {
+        "nome": "Headset Logitech G335",
+        "descricao": "Leve e confortável, som nítido",
+        "preco": "R$ 399,90",
+        "imagem": "images/Headset Gamer.png",
+        "categoria": "Fone",
+        "marca": "Logitech",
+        "rgb": "Não",
+        "cor": "Branco",
+        "avaliacao": 4
+      }
+    ]
+  }
+  
