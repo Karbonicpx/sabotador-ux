@@ -94,6 +94,46 @@ class CardProduto {
 }
 
 // =========================
+// CLASSE: Footer
+// =========================
+
+
+
+class Footer {
+  constructor() {
+  }
+
+  render() {
+    const footer = document.createElement("footer");
+    footer.classList.add("footer");
+
+    footer.innerHTML = `
+      <div class="footer-links">
+        <a href="#">Condições de Uso</a> |
+        <a href="#">Notificação de Privacidade</a> |
+        <a href="#">Cookies</a> |
+        <a href="#">Anúncios Baseados em Interesses</a>
+      </div>
+
+      <div class="footer-company">
+        © 2021–2025 Loja.com, Inc. ou suas afiliadas
+      </div>
+
+      <div class="footer-company">
+        Loja Serviços de Varejo do Brasil Ltda. | CNPJ 00.000.000/0000-00
+      </div>
+
+      <div class="footer-address">
+        Av. Beco Logoali, 1008, Torre E, 18º andar - Tão Tão Distante CEP: 04543-011 |
+        <a href="#">Fale conosco</a> |
+        <a href="mailto:ajuda-loja@loja.com.br">ajuda-loja@loja.com.br</a>
+      </div>
+    `;
+
+    return footer;
+  }
+}
+// =========================
 // GERAR CONTEÚDO NA PÁGINA
 // =========================
 
@@ -113,68 +153,71 @@ document.getElementById("banner-area").appendChild(meuBanner.render());
 
 // Dados locais de fallback
 const dadosJSON = {
-"dados": [
-  {
-    "nome": "Mouse Gamer Cobra",
-    "descricao": "Alta precisão, RGB e 7200 DPI",
-    "preco": "R$ 199,90",
-    "imagem": "../images/Mouse Gamer.png",
-    "categoria": "Mouse",
-    "marca": "Redragon",
-    "rgb": "Sim",
-    "cor": "Preto",
-    "avaliacao": 5
-  },
-  {
-    "nome": "Headset Logitech G733",
-    "descricao": "Som Surround e microfone com filtro de ruído",
-    "preco": "R$ 749,90",
-    "imagem": "../images/Headset Gamer.png",
-    "categoria": "Fone",
-    "marca": "Logitech",
-    "rgb": "Sim",
-    "cor": "Branco",
-    "avaliacao": 4
-  },
-  {
-    "nome": "Teclado Razer BlackWidow",
-    "descricao": "Switch mecânico verde e iluminação RGB",
-    "preco": "R$ 999,99",
-    "imagem": "../images/Teclado Gamer.png",
-    "categoria": "Teclado",
-    "marca": "Razer",
-    "rgb": "Sim",
-    "cor": "Preto",
-    "avaliacao": 5
-  }
-]
+  "dados": [
+    {
+      "nome": "Mouse Gamer Cobra",
+      "descricao": "Alta precisão, RGB e 7200 DPI",
+      "preco": "R$ 199,90",
+      "imagem": "../images/Mouse Gamer.png",
+      "categoria": "Mouse",
+      "marca": "Redragon",
+      "rgb": "Sim",
+      "cor": "Preto",
+      "avaliacao": 5
+    },
+    {
+      "nome": "Headset Logitech G733",
+      "descricao": "Som Surround e microfone com filtro de ruído",
+      "preco": "R$ 749,90",
+      "imagem": "../images/Headset Gamer.png",
+      "categoria": "Fone",
+      "marca": "Logitech",
+      "rgb": "Sim",
+      "cor": "Branco",
+      "avaliacao": 4
+    },
+    {
+      "nome": "Teclado Razer BlackWidow",
+      "descricao": "Switch mecânico verde e iluminação RGB",
+      "preco": "R$ 999,99",
+      "imagem": "../images/Teclado Gamer.png",
+      "categoria": "Teclado",
+      "marca": "Razer",
+      "rgb": "Sim",
+      "cor": "Preto",
+      "avaliacao": 5
+    }
+  ]
 };
 
 // Tenta carregar do JSON externo (agora na pasta pai)
 fetch("../produtos.json")
-.then(response => {
-  if (!response.ok) throw new Error("Arquivo JSON não encontrado");
-  return response.json();
-})
-.then(data => {
-  renderizarProdutos(data.dados);
-})
-.catch(error => {
-  console.warn("Usando dados locais por falha no JSON externo: ", error.message);
-  renderizarProdutos(dadosJSON.dados);
-});
+  .then(response => {
+    if (!response.ok) throw new Error("Arquivo JSON não encontrado");
+    return response.json();
+  })
+  .then(data => {
+    renderizarProdutos(data.dados);
+  })
+  .catch(error => {
+    console.warn("Usando dados locais por falha no JSON externo: ", error.message);
+    renderizarProdutos(dadosJSON.dados);
+  });
 
 // =========================
 // FUNÇÃO: RENDERIZAR PRODUTOS
 // =========================
 function renderizarProdutos(listaProdutos) {
-const produtosArea = document.createElement("div");
-produtosArea.classList.add("produtos");
+  const produtosArea = document.createElement("div");
+  produtosArea.classList.add("produtos");
 
-listaProdutos.forEach(item => {
-  const card = new CardProduto(item);
-  produtosArea.appendChild(card.render());
-});
+  listaProdutos.forEach(item => {
+    const card = new CardProduto(item);
+    produtosArea.appendChild(card.render());
+  });
 
-document.getElementById("produtos-area").appendChild(produtosArea);
+  document.getElementById("produtos-area").appendChild(produtosArea);
 }
+
+const meuFooter = new Footer();
+document.getElementById("footer").appendChild(meuFooter.render());

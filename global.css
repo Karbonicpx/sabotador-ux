@@ -1,0 +1,18 @@
+:root {
+    --primary-color: #fee600;
+    --bg-color: #ebebeb;
+    --text-color: #333333;
+    --font-size: 12px;
+    --font-size-bigger: 14px;
+    --font-family: "Proxima Nova", -apple-system, Roboto, Arial, sans-serif,
+        sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+}
