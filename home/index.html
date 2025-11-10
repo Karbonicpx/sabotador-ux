@@ -19,11 +19,12 @@
           type="text"
           placeholder="Busque por produtos, marcas e muito mais..."
         />
-        <button><img src="../images/search.svg" /></button>
+        <button id="buscarBtn"><img src="../images/search.svg" /></button>
       </div>
 
+
       <div class="navbar_icons">
-        <a href="login.html" class="icon"
+        <a href="index.html" class="icon"
           ><img src="../images/User_logo.svg" alt="user icon"
         /></a>
         <a href="checkout.html" class="icon"
@@ -31,6 +32,16 @@
         /></a>
       </div>
     </header>
+
+    <div id="overlay">
+        <div id="loginModal">
+          <h2>Login</h2>
+          <input type="text" id="usuario" placeholder="Usuário" autofocus />
+          <input type="password" id="senha" placeholder="Senha" />
+          <button id="entrarBtn">Entrar</button>
+          <div id="msg"></div>
+        </div>
+    </div>
 
     <section id="banner-area"></section>
     <section id="produtos-area"></section>
