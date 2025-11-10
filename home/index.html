@@ -16,14 +16,15 @@
 
       <div class="search-bar">
         <input
+          id="search-box"
           type="text"
           placeholder="Busque por produtos, marcas e muito mais..."
         />
         <button id="buscarBtn"><img src="../images/search.svg" /></button>
       </div>
 
-
       <div class="navbar_icons">
+        <!-- login pelo botão não implementado -->
         <a href="index.html" class="icon"
           ><img src="../images/User_logo.svg" alt="user icon"
         /></a>
@@ -33,14 +34,21 @@
       </div>
     </header>
 
-    <div id="overlay">
-        <div id="loginModal">
-          <h2>Login</h2>
-          <input type="text" id="usuario" placeholder="Usuário" autofocus />
-          <input type="password" id="senha" placeholder="Senha" />
-          <button id="entrarBtn">Entrar</button>
-          <div id="msg"></div>
-        </div>
+    <div id="overlay_login">
+      <div id="loginModal">
+        <h2>Login</h2>
+        <input type="text" id="usuario" placeholder="Usuário" autofocus />
+        <input type="password" id="senha" placeholder="Senha" />
+        <button id="entrarBtn">Entrar</button>
+        <div id="msg"></div>
+      </div>
+    </div>
+
+    <div id="overlay_popup">
+      <div id="spam-banner">
+        <img src="../images/popup.png" alt="Spam banner" />
+        <button id="close-banner">X</button>
+      </div>
     </div>
 
     <section id="banner-area"></section>

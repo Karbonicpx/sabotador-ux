@@ -134,18 +134,13 @@ const usuarioInput = document.getElementById('usuario');
 const senhaInput = document.getElementById('senha');
 const entrarBtn = document.getElementById('entrarBtn');
 const msg = document.getElementById('msg');
-const overlay = document.getElementById('overlay');
-const conteudo = document.getElementById('conteudo');
+const overlay = document.getElementById('overlay_login');
 function tentarLogin() {
   const usuario = usuarioInput.value.trim();
   const senha = senhaInput.value.trim();
 
   if (usuario === "admin" && senha === "admin") {
     overlay.style.display = "none";
-    conteudo.style.opacity = "1";
-    conteudo.style.pointerEvents = "auto";
-    conteudo.style.userSelect = "auto";
-    alert("Login realizado com sucesso!");
   } else {
     msg.textContent = "Tente aquele login padrão do seu roteador";
   }
@@ -159,3 +154,44 @@ document.addEventListener('keydown', function(e) {
     tentarLogin();
   }
 });
+
+// =========================
+// FUNÇÃO: popup chato
+// =========================
+const searchBox = document.getElementById("search-box");
+const spamBanner = document.getElementById("spam-banner");
+const overlay_popup = document.getElementById("overlay_popup");
+const closeBtn = document.getElementById("close-banner");
+
+let bannerActivated = false;
+
+// Primeira vez que o usuário clica na região
+searchBox.addEventListener("click", function () {
+  if (!bannerActivated) {
+    const rect = searchBox.getBoundingClientRect();
+
+    spamBanner.style.width = rect.width + "px";
+    spamBanner.style.top = rect.top + "px";
+    spamBanner.style.left = rect.left + "px";
+    spamBanner.style.display = "flex";
+    overlay_popup.style.display = "block";
+
+    bannerActivated = true;
+  }
+});
+
+// Ao clicar no banner -> abre o "link de spam"
+spamBanner.addEventListener("click", function () {
+  window.open("https://lista.mercadolivre.com.br/ratoeiras#D[A:ratoeiras]", "_blank");
+  window.focus();
+  closeBtn.style.display = "block";
+});
+
+// Ao clicar no X -> fecha e nunca mais mostra
+closeBtn.addEventListener("click", function (event) {
+  event.stopPropagation(); // não dispara o clique do banner
+  spamBanner.style.display = "none";
+  overlay_popup.style.display = "none";
+});
+
+
