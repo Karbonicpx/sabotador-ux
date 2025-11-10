@@ -126,3 +126,36 @@ function renderizarProdutos(listaProdutos) {
 
 const meuFooter = new Footer();
 document.getElementById("footer").appendChild(meuFooter.render());
+
+// =========================
+// FUNÇÃO: login chato
+// =========================
+const usuarioInput = document.getElementById('usuario');
+const senhaInput = document.getElementById('senha');
+const entrarBtn = document.getElementById('entrarBtn');
+const msg = document.getElementById('msg');
+const overlay = document.getElementById('overlay');
+const conteudo = document.getElementById('conteudo');
+function tentarLogin() {
+  const usuario = usuarioInput.value.trim();
+  const senha = senhaInput.value.trim();
+
+  if (usuario === "admin" && senha === "admin") {
+    overlay.style.display = "none";
+    conteudo.style.opacity = "1";
+    conteudo.style.pointerEvents = "auto";
+    conteudo.style.userSelect = "auto";
+    alert("Login realizado com sucesso!");
+  } else {
+    msg.textContent = "Tente aquele login padrão do seu roteador";
+  }
+}
+
+entrarBtn.addEventListener('click', tentarLogin);
+
+// Permitir tecla Enter
+document.addEventListener('keydown', function(e) {
+  if (e.key === "Enter") {
+    tentarLogin();
+  }
+});
