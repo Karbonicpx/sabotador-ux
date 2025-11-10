@@ -1,4 +1,19 @@
-header {
+/* ======== ESTILOS GLOBAIS ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: #f5f5f5;
+    color: #333;
+    min-width: 320px;
+  }
+  
+  /* ======== HEADER ======== */
+  header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -7,29 +22,54 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-}
-
-header .logo {
+    flex-wrap: nowrap;
+    gap: 20px;
+    min-height: 60px;
+  }
+  
+  header .logo {
     font-weight: bold;
     font-size: 18px;
-}
-
-#searchBar {
-    width: 300px;
-    padding: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  #searchBar {
+    padding: 8px 12px;
     border: none;
     border-radius: 5px;
-}
-
-main {
+    min-width: 180px;
+    flex: 1;
+    max-width: 400px;
+  }
+  
+  .navbar_icons {
+    display: flex;
+    gap: 15px;
+    flex-shrink: 0;
+  }
+  
+  .navbar_icons span {
+    cursor: pointer;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  
+  /* ======== LAYOUT PRINCIPAL ======== */
+  main {
     display: flex;
     padding: 20px;
     gap: 20px;
     position: relative;
-}
-
-aside#filtros {
-    width: 220px;
+    max-width: 100%;
+    min-height: calc(100vh - 80px);
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  /* ======== FILTROS ======== */
+  aside#filtros {
+    width: 240px;
     background-color: #fff;
     border-radius: 10px;
     padding: 15px;
@@ -37,32 +77,277 @@ aside#filtros {
     height: fit-content;
     position: sticky;
     top: 80px;
-    /* Distância do topo considerando o header */
     left: 20px;
-    /* Encostado na esquerda */
     z-index: 99;
-}
-
-aside#filtros h2 {
+    flex-shrink: 0;
+  }
+  
+  aside#filtros h2 {
     font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.filtro h3 {
+    margin-bottom: 15px;
+    color: #1a1a2e;
+    border-bottom: 2px solid #fee600;
+    padding-bottom: 5px;
+  }
+  
+  .filtro {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filtro h3 {
     font-size: 14px;
-    margin-top: 15px;
+    margin: 15px 0 10px 0;
     color: #222;
-}
-
-.filtro label {
-    display: block;
-    margin: 5px 0;
-    font-size: 12px;
-}
-
-#produtos-grid {
+    font-weight: 600;
+  }
+  
+  .filtro-opcao {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+    width: 100%;
+  }
+  
+  .filtro-opcao input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  
+  .filtro-opcao label {
+    font-size: 13px;
+    cursor: pointer;
+    color: #555;
+  }
+  
+  .filtro-opcao .rating-stars {
+    color: #ffc107;
+    font-size: 14px;
+    margin-left: 5px;
+  }
+  
+  /* ======== PRODUTOS ======== */
+  #produtos-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
     flex: 1;
-}
+    min-width: 0;
+    justify-items: center;
+    align-content: start;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  /* ======== RESPONSIVIDADE ======== */
+  
+
+  /* Desktop padrão */
+  @media (min-width: 1201px) and (max-width: 1599px) {
+    #produtos-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  /* Tablet grande */
+  @media (min-width: 901px) and (max-width: 1200px) {
+    #produtos-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    aside#filtros {
+      width: 200px;
+    }
+  }
+  
+  /* Tablet médio */
+  @media (min-width: 769px) and (max-width: 900px) {
+    #produtos-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    aside#filtros {
+      width: 180px;
+    }
+  }
+  
+  /* ======== MOBILE ======== */
+@media (max-width: 768px) {
+    main {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    aside#filtros {
+      width: 100%;
+      max-width: 400px;
+      position: static;
+      margin: 0 auto 15px auto;
+    }
+  
+    
+    #produtos-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 colunas fixas */
+      justify-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 900px;
+    }
+  
+    
+    .card {
+      transform: scale(0.85);
+      padding: 8px;
+      max-width: 150px;
+      font-size: 0.85rem;
+    }
+  
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+  
+    .card h3,
+    .card p,
+    .card span {
+      font-size: 0.8rem;
+    }
+  }
+  /* ======== MOBILE PEQUENO (até 480px) ======== */
+@media (max-width: 480px) {
+    
+    #produtos-grid {
+      grid-template-columns: repeat(3, minmax(120px, 2fr)); 
+      gap: 8px; /* reduz o espaço entre cards */
+      justify-items: center;
+    }
+  
+    
+    .card {
+      padding: 6px;
+      transform: scale(0.85);
+      font-size: 0.85rem;
+      width: 100%;
+      max-width: 160px; 
+    }
+  
+    .card img {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .card h3,
+    .card p,
+    .card span {
+      font-size: 0.8rem;
+    }
+  
+   
+    aside#filtros {
+      max-width: 95%;
+    }
+  }
+/* ======== AJUSTE MOBILE: LUPA SEMPRE VISÍVEL ======== */
+@media (max-width: 768px) {
+  
+    .search-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border-radius: 5px;
+      overflow: hidden;
+      flex: 1;
+      max-width: 260px; /* mais largo */
+    }
+  
+    
+    .search-bar input[type="text"],
+    #searchBar {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      padding: 6px 8px;
+      font-size: 13px; /* placeholder menor */
+      outline: none;
+    }
+  
+   
+    .search-bar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .search-bar button i,
+    .search-bar button svg {
+      font-size: 18px;
+      color: #333;
+    }
+  
+
+    header .logo {
+      font-size: 14px;
+    }
+  
+    .navbar_icons span,
+    .navbar_icons i,
+    .navbar_icons svg {
+      font-size: 16px;
+    }
+  
+    header {
+      padding: 6px 10px;
+      gap: 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .search-bar {
+      max-width: 220px;
+    }
+  
+    .search-bar input[type="text"],
+    #searchBar {
+      font-size: 12px;
+      padding: 5px 6px;
+    }
+  
+    .search-bar button i,
+    .search-bar button svg {
+      font-size: 16px;
+    }
+  
+    .navbar_icons span,
+    .navbar_icons i,
+    .navbar_icons svg {
+      font-size: 14px;
+    }
+  }  
+  /* ======== AJUSTE PARA TELAS BAIXAS ======== */
+  @media (max-height: 600px) {
+    aside#filtros {
+      position: relative;
+      top: 0;
+    }
+  
+    main {
+      align-items: flex-start;
+    }
+  }
+  

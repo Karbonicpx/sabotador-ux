@@ -117,23 +117,29 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("searchBar").addEventListener("input", aplicarFiltros);
-
   function aplicarFiltros() {
     const busca = document.getElementById("searchBar").value.toLowerCase();
-
+  
     const filtrados = produtos.filter(p => {
       const nomeMatch = p.nome.toLowerCase().includes(busca);
+  
       const categoriaMatch = filtros.categoria.length ? filtros.categoria.includes(p.categoria) : true;
       const marcaMatch = filtros.marca.length ? filtros.marca.includes(p.marca) : true;
       const rgbMatch = filtros.rgb.length ? filtros.rgb.includes(p.rgb) : true;
       const corMatch = filtros.cor.length ? filtros.cor.includes(p.cor) : true;
-      const avaliacaoMatch = filtros.avaliacao.length ? p.avaliacao >= Math.min(...filtros.avaliacao.map(Number)) : true;
-
+  
+      let avaliacaoMatch = true;
+      if (filtros.avaliacao.length) {
+        const avalSelecionadas = filtros.avaliacao.map(Number); // ['5','4'] -> [5,4]
+        avaliacaoMatch = avalSelecionadas.includes(Number(p.avaliacao));
+      }
+  
       return nomeMatch && categoriaMatch && marcaMatch && rgbMatch && corMatch && avaliacaoMatch;
     });
-
+  
     renderizarProdutos(filtrados);
   }
+  
 });
 
 
