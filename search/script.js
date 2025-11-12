@@ -21,8 +21,14 @@ window.addEventListener("DOMContentLoaded", () => {
         ...produto,
         imagem: produto.imagem.replace("images/", "../images/")
       }));
-
-      renderizarProdutos(produtos);
+      const busca = getParametro("busca");
+      if (busca) {
+        const input = document.getElementById("searchBar");
+        input.value = busca;
+        aplicarFiltros();
+      } else {
+        renderizarProdutos(produtos);
+      }
     })
     .catch(err => {
       console.error("Erro ao carregar produtos.json:", err);
@@ -117,31 +123,36 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("searchBar").addEventListener("input", aplicarFiltros);
+
   function aplicarFiltros() {
     const busca = document.getElementById("searchBar").value.toLowerCase();
-  
+
     const filtrados = produtos.filter(p => {
       const nomeMatch = p.nome.toLowerCase().includes(busca);
-  
+
       const categoriaMatch = filtros.categoria.length ? filtros.categoria.includes(p.categoria) : true;
       const marcaMatch = filtros.marca.length ? filtros.marca.includes(p.marca) : true;
       const rgbMatch = filtros.rgb.length ? filtros.rgb.includes(p.rgb) : true;
       const corMatch = filtros.cor.length ? filtros.cor.includes(p.cor) : true;
-  
+
       let avaliacaoMatch = true;
       if (filtros.avaliacao.length) {
         const avalSelecionadas = filtros.avaliacao.map(Number); // ['5','4'] -> [5,4]
         avaliacaoMatch = avalSelecionadas.includes(Number(p.avaliacao));
       }
-  
       return nomeMatch && categoriaMatch && marcaMatch && rgbMatch && corMatch && avaliacaoMatch;
     });
-  
+
     renderizarProdutos(filtrados);
   }
-  
+  const meuFooter = new Footer();
+  document.getElementById("footer").appendChild(meuFooter.render());
+
+
+  function getParametro(nome) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(nome);
+  }
 });
 
 
-const meuFooter = new Footer();
-document.getElementById("footer").appendChild(meuFooter.render());

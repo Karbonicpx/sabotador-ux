@@ -111,3 +111,9 @@ renderProducts();
 const meuFooter = new Footer();
 document.getElementById("footer").appendChild(meuFooter.render());
 updateTotal();
+
+function finalizarTarefa() {
+    const fim = Date.now();
+    localStorage.setItem("fimTarefa", fim);
+    window.close();
+}

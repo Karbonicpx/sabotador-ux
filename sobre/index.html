@@ -55,7 +55,14 @@
           <li>Página inicial com barra de busca e banners promocionais;</li>
           <li>Página de produto com opções de cor, tamanho e avaliação;</li>
           <li>Carrinho de compras com controle de quantidade;</li>
-          <li>Tela de login e de finalização da compra.</li>
+          <li>
+            Tela de login e de finalização da compra.<span style="color: red">
+              (Ainda não implementado)
+            </span>
+          </li>
+          <span style="color: red">
+            Persistência de dados ainda não implementada (nem no site sabotado)
+          </span>
         </ul>
       </section>
       <section class="card">
@@ -74,30 +81,63 @@
           <h3>Missão do teste</h3>
           <ul>
             <li>Realizar login;</li>
-            <li>Comprar <strong>2 mouses</strong>;</li>
-            <li>Comprar <strong>3 teclados</strong>;</li>
+            <li>
+              Comprar <strong>2 mouses</strong>;
+              <span style="color: red"> (Ainda não obrigatório) </span>
+            </li>
+            <li>
+              Comprar <strong>3 teclados</strong>;<span style="color: red">
+                (Ainda não obrigatório)
+              </span>
+            </li>
             <li>Finalizar o pagamento.</li>
           </ul>
         </div>
 
         <div class="links">
-          <p>Escolha uma das plataformas para iniciar o teste:</p>
-          <a
-            href="../home/index.html"
-            target="_blank"
-            onclick="IniciarTarefa()"
-            class="btn-primary sabotado"
-          >
-            Acessar site <strong>Sabotado</strong>
-          </a>
-          <a
-            href="../home/index.html"
-            target="_blank"
-            onclick="IniciarTarefa()"
-            class="btn-primary ux"
-          >
-            Acessar site <strong>Com boas práticas de UX</strong>
-          </a>
+          <section class="fase-container">
+            <div class="fase-conteudo">
+              <h2>Primeira Fase</h2>
+              <span style="color: red"> (Ainda não implementado) </span>
+              <p>
+                Este é o teste <strong>sem sabotagem</strong>. Seu objetivo é
+                realizar as tarefas conforme indicado.
+              </p>
+
+              <a href="#" class="btn-sabotado">
+                Acessar site <strong>sem Sabotagem</strong>
+              </a>
+
+              <div class="tempo-container">
+                <span class="tempo-label">Tempo decorrido:</span>
+                <span id="tempoTarefa1" class="tempo-valor">00:00</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="fase-container">
+            <div class="fase-conteudo">
+              <h2>Segunda Fase</h2>
+              <p>
+                Este é o teste <strong>sabotado</strong>. Seu objetivo é
+                realizar as tarefas conforme indicado.
+              </p>
+
+              <a
+                href="../home/index.html"
+                target="_blank"
+                onclick="IniciarTarefa2()"
+                class="btn-sabotado"
+              >
+                Acessar site <strong>Sabotado</strong>
+              </a>
+
+              <div class="tempo-container">
+                <span class="tempo-label">Tempo decorrido:</span>
+                <span id="tempoTarefa2" class="tempo-valor">00:00</span>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </main>
@@ -106,5 +146,6 @@
       <p>Projeto desenvolvido para a disciplina de Padrões Web - UTFPR</p>
       <p>Licença Creative Commons © 2025</p>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>
