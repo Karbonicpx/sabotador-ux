@@ -2,9 +2,12 @@ main {
     height: 80vh;
     flex: 1;
     display: flex;
+
     gap: 24px;
+    padding: 20px;
 }
 
+/* ============ ÁREA DE CHECKOUT ============ */
 #checkout-area {
     flex: 1;
     padding: 30px;
@@ -12,7 +15,7 @@ main {
 
 /* ======== ESTILO DO CARD ======== */
 .product-card {
-    width: 100%;
+    width: 90%;
     max-width: 750px;
     background: #fff;
     border: 1px solid #e5e5e5;
@@ -22,7 +25,7 @@ main {
     padding: 14px 20px;
     margin-bottom: 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: box-shadow .2s ease;
+    transition: box-shadow 0.2s ease;
 }
 
 .product-card:hover {
@@ -116,6 +119,7 @@ main {
     margin-top: 4px;
 }
 
+/* ======== RESUMO ======== */
 #order-summary {
     width: 100%;
     max-width: 350px;
@@ -177,4 +181,113 @@ main {
 
 .btn-primary:active {
     background-color: #0a56c4;
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+/* Tablets (até 1024px) */
+@media (max-width: 1150px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        height: auto;
+    }
+
+    #checkout-area {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #order-summary {
+        width: 100%;
+        max-width: 600px;
+        justify-content: center;
+        height: auto;
+    }
+
+    .product-card {
+        width: 100%;
+    }
+
+    .product-thumb {
+        width: 140px;
+        height: 140px;
+    }
+
+    .product-name {
+        font-size: 20px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+}
+
+/* Celulares (até 768px) */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        height: auto;
+    }
+
+    #checkout-area {
+        width: 100%;
+        padding: 0;
+    }
+
+    .product-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 14px;
+        width: 95%;
+    }
+
+    .product-thumb {
+        width: 100%;
+        height: 180px;
+        margin-bottom: 10px;
+    }
+
+    .product-info {
+        padding: 0;
+        width: 100%;
+    }
+
+    .product-name {
+        font-size: 18px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .product-actions {
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    #order-summary {
+        width: 100%;
+        max-width: none;
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .summary-card {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .btn-primary {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+
+
 }
