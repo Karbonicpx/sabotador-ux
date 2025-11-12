@@ -15,8 +15,9 @@ class Banner {
 
     const img = document.createElement("img");
     img.src = this.imagem;
-    img.style.width = this.largura;
-    img.style.height = this.altura;
+    //img.style.width = this.largura;
+    //img.style.height = this.altura;
+    
 
     const dots = document.createElement("div");
     dots.classList.add("dots");
@@ -45,8 +46,8 @@ class Banner {
 // Banner usando imagem local
 const meuBanner = new Banner({
   imagem: "../images/Banner Produtos.png",
-  largura: "1000px",
-  altura: "500px",
+  largura: "100%",
+  altura: "auto",
   qtdPontos: 1
 });
 
@@ -149,7 +150,7 @@ function tentarLogin() {
 entrarBtn.addEventListener('click', tentarLogin);
 
 // Permitir tecla Enter
-document.addEventListener('keydown', function (e) {
+document.addEventListener('keydown', function(e) {
   if (e.key === "Enter") {
     tentarLogin();
   }
@@ -170,9 +171,10 @@ searchBox.addEventListener("click", function () {
   if (!bannerActivated) {
     const rect = searchBox.getBoundingClientRect();
 
-    spamBanner.style.width = rect.width + "px";
+    spamBanner.style.width = 1.5*rect.width + "px";
     spamBanner.style.top = rect.top + "px";
-    spamBanner.style.left = rect.left + "px";
+    const bannerLeft = (window.innerWidth - 1.5*rect.width) / 2;
+    spamBanner.style.left = bannerLeft + "px";
     spamBanner.style.display = "flex";
     overlay_popup.style.display = "block";
 
@@ -195,11 +197,3 @@ closeBtn.addEventListener("click", function (event) {
 });
 
 
-
-// =========================
-function pesquisar() {
-  const termo = document.getElementById("search-box").value.trim();
-  if (termo) {
-    window.location.href = `../search/index.html?busca=${encodeURIComponent(termo)}`;
-  }
-}
