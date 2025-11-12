@@ -32,5 +32,6 @@ window.addEventListener("storage", (event) => {
         const minutes = Math.floor(duracao / 60).toString().padStart(2, '0');
         const seconds = (duracao % 60).toFixed(0).toString().padStart(2, '0');
         time.textContent = `${minutes}:${seconds}`;
+        if (intervaloTempo) clearInterval(intervaloTempo);
     }
 });
