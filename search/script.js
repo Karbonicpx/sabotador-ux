@@ -89,7 +89,7 @@ window.addEventListener("DOMContentLoaded", () => {
         nome: item.nome,
         descricao: item.descricao,
         preco: item.preco,
-        imagem: item.imagem,
+        imagem: "../images/Produtos/"+item.categoria+"/"+item.cor+".png",
         categoria: item.categoria,
         marca: item.marca,
         rgb: item.rgb,
