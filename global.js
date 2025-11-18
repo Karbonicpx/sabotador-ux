@@ -44,11 +44,11 @@ class Footer {
 // =========================
 
 class CardProduto {
-    constructor({ nome, descricao, preco, imagem, categoria, marca, rgb, cor, avaliacao, largura = "200px", altura = "150px" }) {
+    constructor({ nome, descricao, preco, imagem, categoria, marca, rgb, cor, avaliacao, largura = "180px", altura = "150px" }) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
-        this.imagem = imagem;
+        this.imagem = "/images/Produtos/"+categoria+"/"+cor+".png"
         this.categoria = categoria;
         this.marca = marca;
         this.rgb = rgb;
