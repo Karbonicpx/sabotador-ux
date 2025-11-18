@@ -179,6 +179,12 @@ body {
     transition: transform 0.2s;
 }
 
+.icon-brand img{
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+}
+
 .icon-carrinho:hover {
     transform: scale(1.2);
 }
