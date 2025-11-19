@@ -19,8 +19,11 @@
           id="search-box"
           type="text"
           placeholder="Busque por produtos, marcas e muito mais..."
+          onkeydown="if(event.key === 'Enter') pesquisar()"
         />
-        <button id="buscarBtn"><img src="../images/search.svg" onclick="pesquisar()" alt="lupa"/></button>
+        <button id="buscarBtn">
+          <img src="../images/search.svg" onclick="pesquisar()" alt="lupa" />
+        </button>
       </div>
 
       <div class="navbar_icons">
@@ -28,13 +31,13 @@
         <a href="index.html" class="icon"
           ><img src="../images/User_logo.svg" alt="user icon"
         /></a>
-        <a href="checkout.html" class="icon"
+        <a href="../checkout/index.html" class="icon"
           ><img src="../images/checkout.svg" alt="checkout icon"
         /></a>
       </div>
     </header>
 
-    <div id="overlay_login">
+    <!-- <div id="overlay_login">
       <div id="loginModal">
         <h2>Login</h2>
         <input type="text" id="usuario" placeholder="Usuário" autofocus />
@@ -49,7 +52,7 @@
         <img src="../images/popup.png" alt="Spam banner" />
         <button id="close-banner">X</button>
       </div>
-    </div>
+    </div> -->
 
     <section id="banner-area"></section>
     <section id="produtos-area"></section>

@@ -28,7 +28,6 @@ body {
     z-index: 1;
     flex-wrap: nowrap;
     padding: 5px 5vw;
-    height: 60px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -84,6 +83,42 @@ body {
 .icon:hover {
     transition: transform 0.2s ease;
     transform: scale(1.2);
+}
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        padding: 0 10px;
+    }
+
+    .home_logo img {
+        height: 30px;
+    }
+
+    .search-bar {
+        flex: 1;
+        height: 35px;
+        margin: 5px;
+
+    }
+
+    .search-bar input {
+        font-size: 1em;
+
+    }
+
+    .search-bar img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .navbar_icons {
+        gap: 0;
+    }
+
+    .navbar_icons img {
+        height: 30px;
+    }
+
 }
 
 /* ======= Footer ======= */
@@ -183,10 +218,10 @@ body {
     transition: transform 0.2s;
 }
 
-.icon-brand img{
-  width: 4rem;
-  height: 4rem;
-  object-fit: contain;
+.icon-brand img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
 }
 
 .icon-carrinho:hover {
