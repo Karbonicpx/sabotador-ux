@@ -1,6 +1,6 @@
 
 
-// Dados falsos (estrutura similar à sua)
+// Dados placheholder
 const products = [
     {
         id: "p1",
@@ -8,7 +8,7 @@ const products = [
         descricao: "Alta precisão, RGB e 7200 DPI",
         preco: "R$ 199,90",
         precoNum: 199.90,
-        imagem: "../images/Mouse Gamer.png", // se não existir, o placeholder será mostrado
+        imagem: "../images/Mouse Gamer.png", 
         categoria: "Mouse",
         marca: "Redragon",
         rgb: "Sim",
@@ -112,8 +112,33 @@ const meuFooter = new Footer();
 document.getElementById("footer").appendChild(meuFooter.render());
 updateTotal();
 
+
 function finalizarTarefa() {
+    // Coletar dados do carrinho
+    const cartItems = [];
+    
+    products.forEach(p => {
+        const card = document.querySelector(`.qty[data-id="${p.id}"]`);
+        const qty = parseInt(card.querySelector('input').value) || 1;
+        
+        if (qty > 0) {
+            cartItems.push({
+                id: p.id,
+                nome: p.nome,
+                descricao: p.descricao,
+                precoNum: p.precoNum,
+                quantidade: qty,
+                imagem: p.imagem  
+            });
+        }
+    });
+    
+    // Salvar no localStorage para a página de checkout
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    
     const fim = Date.now();
     localStorage.setItem("fimTarefa", fim);
-    window.close();
+    
+    // Redirecionar para a página de finalizacao
+    window.location.href = "../compra/index.html";
 }

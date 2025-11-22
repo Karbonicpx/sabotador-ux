@@ -1,0 +1,252 @@
+/* Remove qualquer restrição de containers pais */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+header {
+    background-color: #fee600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.home_logo img {
+    height: 50px;
+    width: auto;
+}
+
+.navbar_icons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar_icons .icon img {
+    height: 30px;
+    width: auto;
+}
+
+/* LAYOUT PRINCIPAL */
+.main-content {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Coluna esquerda - Formulários */
+.form-column {
+    flex: 2;
+}
+
+/* Coluna direita - Detalhes do pedido */
+.order-column {
+    flex: 1;
+}
+
+
+.order-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    flex-shrink: 0;
+}
+
+.order-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.order-item-img .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+    color: #999;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.order-item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.order-item-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.order-item .item-desc {
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
+}
+
+.order-item-price {
+    font-weight: 600;
+    color: #222;
+}
+
+.order-total {
+    margin-top: 15px;
+}
+
+.order-total p {
+    margin: 8px 0;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-total p:last-child {
+    font-size: 18px;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    margin-top: 12px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px 0;
+}
+
+/* CHECKOUT */
+.checkout-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Caixa padrão */
+.checkout-box {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.checkout-box h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #222;
+}
+
+.checkout-box h3 {
+    margin: 15px 0 10px 0;
+    font-size: 18px;
+    color: #444;
+}
+
+.lbl {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.input, .textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    font-size: 14px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.linha {
+    display: flex;
+    gap: 10px;
+}
+
+.linha .input {
+    flex: 1;
+}
+
+.pagamento {
+    margin-top: 10px;
+}
+
+.oculto {
+    display: none;
+}
+
+.btn-comprar {
+    width: 100%;
+    padding: 15px;
+    background: #fee600;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #222;
+    cursor: pointer;
+    transition: 0.2s;
+    box-sizing: border-box;
+}
+
+.btn-comprar:hover {
+    background: #e5ce00;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+    
+    .main-content {
+        flex-direction: column;
+        padding: 10px;
+        margin: 15px auto;
+    }
+    
+    .linha {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-column,
+    .order-column {
+        flex: none;
+        width: 100%;
+    }
+}
