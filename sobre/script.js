@@ -4,6 +4,9 @@ function IniciarTarefa2() {
     const inicio = Date.now();
     localStorage.setItem("inicioTarefa2", inicio);
 
+    // Id que vai definir a descrição de tarefas na pagina home
+    localStorage.setItem("idMissao", 2)
+
     const time = document.getElementById("tempoTarefa2");
     time.textContent = "00:00";
 
@@ -35,3 +38,8 @@ window.addEventListener("storage", (event) => {
         if (intervaloTempo) clearInterval(intervaloTempo);
     }
 });
+
+function setModoSabotagem(isSabotado) {
+    localStorage.setItem("modoSabotado", isSabotado ? "true" : "false");
+    console.log(isSabotado)
+}

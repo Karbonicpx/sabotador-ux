@@ -18,6 +18,36 @@
     width: auto;
   }
 }
+/* Área da descrição das tarefas */
+#descricao-area {
+  width: 30%;
+  background-color: white;
+  border-radius: 10px;
+  margin: 10px auto; 
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.titulo-tarefas {
+  color: #ff0000;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+#descricao-tarefa {
+  font-size: 16px;
+  color: #333;
+  max-width: 1200px;
+  line-height: 1.2;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
 
 .dots {
   margin-top: 10px;

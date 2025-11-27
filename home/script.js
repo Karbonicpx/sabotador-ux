@@ -1,4 +1,28 @@
 // =========================
+// CONTROLE DE SABOTAGEM
+// =========================
+
+const modoSabotado = localStorage.getItem("modoSabotado") === "true";
+const idMissao = localStorage.getItem("idMissao")
+const overlayLogin = document.getElementById("overlay_login");
+const overlayPopup = document.getElementById("overlay_popup");
+
+// Se o site NÃO está sabotado, esconder login e popup
+if (!modoSabotado) {
+  overlayLogin.style.display = "none";
+  overlayPopup.style.display = "none";
+} else {
+  // Exibir login
+  overlayLogin.style.display = "flex";
+
+  // Popup aparece só depois do clique no search-box,
+  // então deixamos ele invisível por padrão:
+  overlayPopup.style.display = "none";
+}
+
+definirDescricao(idMissao)
+
+// =========================
 // CLASSE: Banner
 // =========================
 class Banner {
@@ -110,6 +134,16 @@ fetch("../produtos.json")
     renderizarProdutos(dadosJSON.dados);
   });
 
+
+// Função para definir a descrição de tarefas na pagina home, de acordo com a missão selecionada no sobre
+function definirDescricao(idMissao) {
+  const descricaoTexto = document.getElementById("descricao-tarefa");
+  if (idMissao == 2) { 
+    descricaoTexto.innerHTML =
+      "<span class='titulo-tarefas'>Tarefas a fazer:</span><ul class='lista-tarefas'><li>Realizar Login;</li><li>Comprar 2 Mouses;</li><li>Comprar 3 teclados;</li><li>Finalizar o pagamento</li></ul>";
+  }
+}
+
 // =========================
 // FUNÇÃO: RENDERIZAR PRODUTOS
 // =========================
@@ -131,70 +165,70 @@ document.getElementById("footer").appendChild(meuFooter.render());
 // // =========================
 // // FUNÇÃO: login chato
 // // =========================
-// const usuarioInput = document.getElementById('usuario');
-// const senhaInput = document.getElementById('senha');
-// const entrarBtn = document.getElementById('entrarBtn');
-// const msg = document.getElementById('msg');
-// const overlay = document.getElementById('overlay_login');
-// function tentarLogin() {
-//   const usuario = usuarioInput.value.trim();
-//   const senha = senhaInput.value.trim();
+const usuarioInput = document.getElementById('usuario');
+const senhaInput = document.getElementById('senha');
+const entrarBtn = document.getElementById('entrarBtn');
+const msg = document.getElementById('msg');
+const overlay = document.getElementById('overlay_login');
+function tentarLogin() {
+  const usuario = usuarioInput.value.trim();
+  const senha = senhaInput.value.trim();
 
-//   if (usuario === "admin" && senha === "admin") {
-//     overlay.style.display = "none";
-//   } else {
-//     msg.textContent = "Tente aquele login padrão do seu roteador";
-//   }
-// }
+  if (usuario === "admin" && senha === "admin") {
+    overlay.style.display = "none";
+  } else {
+    msg.textContent = "Tente aquele login padrão do seu roteador";
+  }
+}
 
-// entrarBtn.addEventListener('click', tentarLogin);
+entrarBtn.addEventListener('click', tentarLogin);
 
-// // Permitir tecla Enter
-// document.addEventListener('keydown', function (e) {
-//   if (e.key === "Enter") {
-//     tentarLogin();
-//   }
-// });
+// Permitir tecla Enter
+document.addEventListener('keydown', function (e) {
+  if (e.key === "Enter") {
+    tentarLogin();
+  }
+});
 
-// // =========================
-// // FUNÇÃO: popup chato
-// // =========================
-// const searchBox = document.getElementById("search-box");
-// const spamBanner = document.getElementById("spam-banner");
-// const overlay_popup = document.getElementById("overlay_popup");
-// const closeBtn = document.getElementById("close-banner");
+// =========================
+// FUNÇÃO: popup chato
+// =========================
+const searchBox = document.getElementById("search-box");
+const spamBanner = document.getElementById("spam-banner");
+const overlay_popup = document.getElementById("overlay_popup");
+const closeBtn = document.getElementById("close-banner");
 
-// let bannerActivated = false;
+let bannerActivated = false;
 
-// // Primeira vez que o usuário clica na região
-// searchBox.addEventListener("click", function () {
-//   if (!bannerActivated) {
-//     const rect = searchBox.getBoundingClientRect();
+// Primeira vez que o usuário clica na região e se estiver no modo sabotado
+searchBox.addEventListener("click", function () {
+  if (!bannerActivated && modoSabotado === true) {
+    const rect = searchBox.getBoundingClientRect();
 
-//     spamBanner.style.width = 1.5 * rect.width + "px";
-//     spamBanner.style.top = rect.top + "px";
-//     const bannerLeft = (window.innerWidth - 1.5 * rect.width) / 2;
-//     spamBanner.style.left = bannerLeft + "px";
-//     spamBanner.style.display = "flex";
-//     overlay_popup.style.display = "block";
+    spamBanner.style.width = 1.5 * rect.width + "px";
+    spamBanner.style.top = rect.top + "px";
+    const bannerLeft = (window.innerWidth - 1.5 * rect.width) / 2;
+    spamBanner.style.left = bannerLeft + "px";
+    spamBanner.style.display = "flex";
+    overlay_popup.style.display = "block";
 
-//     bannerActivated = true;
-//   }
-// });
+    bannerActivated = true;
+  }
+});
 
-// // Ao clicar no banner -> abre o "link de spam"
-// spamBanner.addEventListener("click", function () {
-//   window.open("https://lista.mercadolivre.com.br/ratoeiras#D[A:ratoeiras]", "_blank");
-//   window.focus();
-//   closeBtn.style.display = "block";
-// });
+// Ao clicar no banner -> abre o "link de spam"
+spamBanner.addEventListener("click", function () {
+  window.open("https://lista.mercadolivre.com.br/ratoeiras#D[A:ratoeiras]", "_blank");
+  window.focus();
+  closeBtn.style.display = "block";
+});
 
-// // Ao clicar no X -> fecha e nunca mais mostra
-// closeBtn.addEventListener("click", function (event) {
-//   event.stopPropagation(); // não dispara o clique do banner
-//   spamBanner.style.display = "none";
-//   overlay_popup.style.display = "none";
-// });
+// Ao clicar no X -> fecha e nunca mais mostra
+closeBtn.addEventListener("click", function (event) {
+  event.stopPropagation(); // não dispara o clique do banner
+  spamBanner.style.display = "none";
+  overlay_popup.style.display = "none";
+});
 
 
 
