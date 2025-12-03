@@ -23,12 +23,14 @@
   width: 30%;
   background-color: white;
   border-radius: 10px;
-  margin: 10px auto; 
   padding: 5px;
   display: flex;
+  margin: 10px;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  position: fixed;
+  right: 0;
 }
 
 .titulo-tarefas {

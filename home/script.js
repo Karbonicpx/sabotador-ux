@@ -9,6 +9,8 @@ const overlayPopup = document.getElementById("overlay_popup");
 
 // Se o site NÃO está sabotado, esconder login e popup
 if (!modoSabotado) {
+
+
   overlayLogin.style.display = "none";
   overlayPopup.style.display = "none";
 } else {
@@ -22,7 +24,7 @@ if (!modoSabotado) {
 }
 
 
-definirDescricao(idMissao)
+definirDescricao()
 
 
 // =========================
