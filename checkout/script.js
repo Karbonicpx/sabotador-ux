@@ -2,7 +2,6 @@
 let products = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 const area = document.getElementById('checkout-area');
-
 function renderProducts() {
     area.innerHTML = "";
 
@@ -45,6 +44,9 @@ function renderProducts() {
 
         area.appendChild(card);
     });
+
+    // Mostra o valor total da compra
+    updateTotal();
 
     // Eventos dos botões + e -
     document.querySelectorAll('.qty button').forEach(btn => {
@@ -191,14 +193,16 @@ function updateTotal() {
     let total = 0;
 
     products.forEach(p => {
-        // Converte o preço string para número
         const precoNumerico = parsePrice(p.preco);
         const quantidade = p.quantidade || 1;
         total += precoNumerico * quantidade;
     });
 
-    document.getElementById('summary-total').textContent = `R$ ${formatCurrency(total)}`;
+    const totalElement = document.getElementById('summary-total');
+
+    totalElement.textContent = `R$ ${formatCurrency(total)}`;
 }
+
 
 // Função para converter preço string para número
 function parsePrice(priceString) {
@@ -250,4 +254,3 @@ renderProducts();
 
 const meuFooter = new Footer();
 document.getElementById("footer").appendChild(meuFooter.render());
-updateTotal();
