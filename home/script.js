@@ -9,6 +9,8 @@ const overlayPopup = document.getElementById("overlay_popup");
 
 // Se o site NÃO está sabotado, esconder login e popup
 if (!modoSabotado) {
+
+
   overlayLogin.style.display = "none";
   overlayPopup.style.display = "none";
 } else {
@@ -18,9 +20,12 @@ if (!modoSabotado) {
   // Popup aparece só depois do clique no search-box,
   // então deixamos ele invisível por padrão:
   overlayPopup.style.display = "none";
+
 }
 
-definirDescricao(idMissao)
+
+definirDescricao()
+
 
 // =========================
 // CLASSE: Banner
@@ -94,12 +99,11 @@ fetch("../produtos.json")
 
 
 // Função para definir a descrição de tarefas na pagina home, de acordo com a missão selecionada no sobre
-function definirDescricao(idMissao) {
+function definirDescricao() {
   const descricaoTexto = document.getElementById("descricao-tarefa");
-  if (idMissao == 2) {
-    descricaoTexto.innerHTML =
-      "<span class='titulo-tarefas'>Tarefas a fazer:</span><ul class='lista-tarefas'><li>Realizar Login;</li><li>Comprar 2 Mouses;</li><li>Comprar 3 teclados;</li><li>Finalizar o pagamento</li></ul>";
-  }
+
+  descricaoTexto.innerHTML =
+    "<span class='titulo-tarefas'>Tarefas a fazer:</span><ul class='lista-tarefas'><li>Realizar Login;</li><li>Comprar 2 Mouses;</li><li>Comprar 3 teclados;</li><li>Finalizar o pagamento</li></ul>";
 }
 
 // =========================
