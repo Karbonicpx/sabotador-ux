@@ -18,12 +18,13 @@
     width: auto;
   }
 }
+
 /* Área da descrição das tarefas */
 #descricao-area {
   width: 30%;
   background-color: white;
   border-radius: 10px;
-  margin: 10px auto; 
+  margin: 10px auto;
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -176,6 +177,11 @@ input {
   display: none;
   z-index: 2;
 }
+
+#produtos-grid {
+  width: 95%;
+}
+
 
 @media screen and (max-width: 1086px) {
   .banner {

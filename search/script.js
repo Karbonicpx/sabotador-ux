@@ -1,10 +1,6 @@
 
 window.addEventListener("DOMContentLoaded", () => {
   let produtos = [];
-
-  console.log("Iniciando carregamento...");
-
-  // CORREÇÃO: Caminho correto para a pasta search
   fetch("../produtos.json")
     .then(res => {
       if (!res.ok) {
@@ -13,7 +9,6 @@ window.addEventListener("DOMContentLoaded", () => {
       return res.json();
     })
     .then(data => {
-      console.log("Dados carregados com sucesso:", data.dados.length, "produtos");
       produtos = data.dados;
 
       // CORREÇÃO: Ajustar caminhos das imagens
@@ -32,45 +27,10 @@ window.addEventListener("DOMContentLoaded", () => {
     })
     .catch(err => {
       console.error("Erro ao carregar produtos.json:", err);
-      // Carregar dados de fallback
-      carregarDadosFallback();
     });
-
-  function carregarDadosFallback() {
-    console.log("Carregando dados de fallback...");
-    const dadosFallback = {
-      "dados": [
-        {
-          "nome": "Mouse Gamer Cobra (Teste)",
-          "descricao": "Alta precisão, RGB e 7200 DPI",
-          "preco": "R$ 199,90",
-          "imagem": "../images/Mouse Gamer.png",
-          "categoria": "Mouse",
-          "marca": "Redragon",
-          "rgb": "Sim",
-          "cor": "Preto",
-          "avaliacao": 5
-        },
-        {
-          "nome": "Headset Logitech G733 (Teste)",
-          "descricao": "Som Surround e microfone com filtro de ruído",
-          "preco": "R$ 749,90",
-          "imagem": "../images/Headset Gamer.png",
-          "categoria": "Fone",
-          "marca": "Logitech",
-          "rgb": "Sim",
-          "cor": "Branco",
-          "avaliacao": 4
-        }
-      ]
-    };
-    produtos = dadosFallback.dados;
-    renderizarProdutos(produtos);
-  }
 
   function renderizarProdutos(lista) {
     const grid = document.getElementById("produtos-grid");
-    console.log("Grid encontrado:", grid);
 
     if (!grid) {
       console.error("Elemento #produtos-grid não encontrado!");
@@ -89,7 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
         nome: item.nome,
         descricao: item.descricao,
         preco: item.preco,
-        imagem: "../images/Produtos/"+item.categoria+"/"+item.cor+".png",
+        imagem: "../images/Produtos/" + item.categoria + "/" + item.cor + ".png",
         categoria: item.categoria,
         marca: item.marca,
         rgb: item.rgb,
@@ -102,7 +62,6 @@ window.addEventListener("DOMContentLoaded", () => {
       grid.appendChild(card.render());
     });
 
-    console.log("Produtos renderizados:", lista.length);
   }
 
   // Sistema de filtros
@@ -153,6 +112,25 @@ window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     return params.get(nome);
   }
+
+  // Toggle filtros
+  const btnToggleFiltros = document.getElementById("toggle-filtros");
+  const painelFiltros = document.getElementById("filtros");
+  btnToggleFiltros.addEventListener("click", () => {
+    painelFiltros.classList.toggle("hidden");
+  });
+
+  // Adiciona evento para quando a tela for redimensionada 
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      painelFiltros.classList.remove("hidden");
+    }
+
+    if (window.innerWidth <= 768) {
+      painelFiltros.classList.add("hidden");
+    }
+  });
+
 });
 
 

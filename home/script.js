@@ -77,48 +77,6 @@ const meuBanner = new Banner({
 
 document.getElementById("banner-area").appendChild(meuBanner.render());
 
-// =========================
-// CARREGAR PRODUTOS DO JSON EXTERNO
-// =========================
-
-// Dados locais de fallback
-const dadosJSON = {
-  "dados": [
-    {
-      "nome": "Mouse Gamer Cobra",
-      "descricao": "Alta precisão, RGB e 7200 DPI",
-      "preco": "R$ 199,90",
-      "imagem": "../images/Mouse Gamer.png",
-      "categoria": "Mouse",
-      "marca": "Redragon",
-      "rgb": "Sim",
-      "cor": "Preto",
-      "avaliacao": 5
-    },
-    {
-      "nome": "Headset Logitech G733",
-      "descricao": "Som Surround e microfone com filtro de ruído",
-      "preco": "R$ 749,90",
-      "imagem": "../images/Headset Gamer.png",
-      "categoria": "Fone",
-      "marca": "Logitech",
-      "rgb": "Sim",
-      "cor": "Branco",
-      "avaliacao": 4
-    },
-    {
-      "nome": "Teclado Razer BlackWidow",
-      "descricao": "Switch mecânico verde e iluminação RGB",
-      "preco": "R$ 999,99",
-      "imagem": "../images/Teclado Gamer.png",
-      "categoria": "Teclado",
-      "marca": "Razer",
-      "rgb": "Sim",
-      "cor": "Preto",
-      "avaliacao": 5
-    }
-  ]
-};
 
 // Tenta carregar do JSON externo (agora na pasta pai)
 fetch("../produtos.json")
@@ -138,7 +96,7 @@ fetch("../produtos.json")
 // Função para definir a descrição de tarefas na pagina home, de acordo com a missão selecionada no sobre
 function definirDescricao(idMissao) {
   const descricaoTexto = document.getElementById("descricao-tarefa");
-  if (idMissao == 2) { 
+  if (idMissao == 2) {
     descricaoTexto.innerHTML =
       "<span class='titulo-tarefas'>Tarefas a fazer:</span><ul class='lista-tarefas'><li>Realizar Login;</li><li>Comprar 2 Mouses;</li><li>Comprar 3 teclados;</li><li>Finalizar o pagamento</li></ul>";
   }
@@ -147,17 +105,41 @@ function definirDescricao(idMissao) {
 // =========================
 // FUNÇÃO: RENDERIZAR PRODUTOS
 // =========================
-function renderizarProdutos(listaProdutos) {
-  const produtosArea = document.createElement("div");
-  produtosArea.classList.add("produtos");
+function renderizarProdutos(lista) {
+  const grid = document.getElementById("produtos-grid");
 
-  listaProdutos.forEach(item => {
-    const card = new CardProduto(item);
-    produtosArea.appendChild(card.render());
+  if (!grid) {
+    console.error("Elemento #produtos-grid não encontrado!");
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  if (lista.length === 0) {
+    grid.innerHTML = "<p>Nenhum produto encontrado</p>";
+    return;
+  }
+
+  lista.forEach(item => {
+    const card = new CardProduto({
+      nome: item.nome,
+      descricao: item.descricao,
+      preco: item.preco,
+      imagem: "../images/Produtos/" + item.categoria + "/" + item.cor + ".png",
+      categoria: item.categoria,
+      marca: item.marca,
+      rgb: item.rgb,
+      cor: item.cor,
+      avaliacao: item.avaliacao,
+      largura: "180px",
+      altura: "150px"
+    });
+
+    grid.appendChild(card.render());
   });
 
-  document.getElementById("produtos-area").appendChild(produtosArea);
 }
+
 
 const meuFooter = new Footer();
 document.getElementById("footer").appendChild(meuFooter.render());
@@ -234,9 +216,3 @@ closeBtn.addEventListener("click", function (event) {
 
 
 // =========================
-function pesquisar() {
-  const termo = document.getElementById("search-box").value.trim();
-  if (termo) {
-    window.location.href = `../search/index.html?busca=${encodeURIComponent(termo)}`;
-  }
-}

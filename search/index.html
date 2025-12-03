@@ -9,28 +9,33 @@
   </head>
 
   <body>
-    <header class="navbar">
-      <a href="../home/index.html" class="home_logo">
-        <img src="../images/logo.png" alt="store logo" />
-      </a>
+    <div class="header-search">
+      <header class="navbar">
+        <a href="../home/index.html" class="home_logo">
+          <img src="../images/logo.png" alt="store logo" />
+        </a>
 
-      <div class="search-bar">
-        <input type="text" placeholder="Pesquisar..." id="searchBar" />
-        <button><img src="../images/search.svg" /></button>
-      </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Pesquisar..." id="searchBar" />
+          <button><img src="../images/search.svg" /></button>
+        </div>
 
-      <div class="navbar_icons">
-        <a href="login.html" class="icon"
-          ><img src="../images/User_logo.svg" alt="user icon"
-        /></a>
-        <a href="../checkout/index.html" class="icon"
-          ><img src="../images/checkout.svg" alt="checkout icon"
-        /></a>
-      </div>
-    </header>
+        <div class="navbar_icons">
+          <a href="login.html" class="icon"
+            ><img src="../images/User_logo.svg" alt="user icon"
+          /></a>
+          <a href="../checkout/index.html" class="icon"
+            ><img src="../images/checkout.svg" alt="checkout icon"
+          /></a>
+        </div>
+      </header>
+      <button id="toggle-filtros" class="toggle-filtros">
+        Filtros
+        <span> <img src="../images/filter.svg" alt="filtro icone" /></span>
+      </button>
+    </div>
 
     <main>
-      <!-- Filtros -->
       <aside id="filtros">
         <h2>Filtros</h2>
 
