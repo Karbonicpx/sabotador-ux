@@ -77,7 +77,7 @@ const meuBanner = new Banner({
   imagem: "../images/Banner Produtos.png",
   largura: "100%",
   altura: "auto",
-  qtdPontos: 1
+  qtdPontos: 4
 });
 
 document.getElementById("banner-area").appendChild(meuBanner.render());
@@ -123,8 +123,17 @@ function renderizarProdutos(lista) {
     grid.innerHTML = "<p>Nenhum produto encontrado</p>";
     return;
   }
+  //alterado para a home exibir menos itens de maneira mais aleatória
+  const selecionados = [];
 
-  lista.forEach(item => {
+  const startRandom = Math.floor(Math.random() * 31); 
+  const start = lista.length > 0 ? startRandom % lista.length : 0;
+  // 18 fica ok em desktops maximizados, e em telas mais estreitas serve para demonstrar a responsividade
+  for (let i = start; selecionados.length < 18 && i < lista.length; i += 5) {
+    selecionados.push(lista[i]);
+  }
+
+  selecionados.forEach(item => {
     const card = new CardProduto({
       nome: item.nome,
       descricao: item.descricao,
