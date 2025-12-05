@@ -133,14 +133,19 @@ function showMessage(message) {
         z-index: 1000;
         font-family: Arial, sans-serif;
     `;
-    
+    messageEl.style.transform = "translateY(0)";
+    messageEl.style.transition = "transform 1.2s ease"; // animação suave
+
     document.body.appendChild(messageEl);
     
+    setTimeout(() => {
+      messageEl.style.transform = "translateY(-150%)";
+    }, 200);
     setTimeout(() => {
         if (messageEl.parentNode) {
             messageEl.remove();
         }
-    }, 1000);//alterado para 1 segundo
+    }, 1500);//alterado
 }
 
 // Atualiza quantidade no localStorage
