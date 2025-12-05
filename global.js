@@ -129,9 +129,14 @@ class CardProduto {
     };
 
     // Verifica se o produto já existe no carrinho
+    /*
+    alterei a checagem
+    o ideal era ter id no json, mas esqueci na construção inicial.
+    a combinação dos atributos garante unicidade (nome foi gerado a partir deles)
+    alterei aqui para não causar problemas em outras partes do código
+    */ 
     const produtoExistente = carrinho.find(item =>
-      item.nome === this.nome && item.cor === this.cor && item.rgb === this.rgb
-    );
+      item.nome === produto.nome);
 
     if (!produtoExistente) {
       // Se não existe, joga o produto no carrinho
@@ -139,7 +144,7 @@ class CardProduto {
     }
     else if(modoSabotado === "false"){
       produtoExistente.quantidade = (produtoExistente.quantidade || 1) + 1;
-    }
+    }//só altera a quantidade no modo normal
 
     // Salva no localStorage
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
