@@ -141,7 +141,11 @@ class CardProduto {
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
     // Feedback visual 
-    this.mostrarFeedback();
+    const modoSabotado = localStorage.getItem("modoSabotado");
+    if(modoSabotado === "false")
+    {
+      this.mostrarFeedback();
+    }
 
     console.log("Produto adicionado ao carrinho:", produto);
   }

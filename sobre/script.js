@@ -24,6 +24,18 @@ function IniciarTarefaSabotada() {
         time.textContent = `${minutos}:${segundos}`;
     }, 1000);
 }
+//temporário para testar sabotagem
+function IniciarTarefaNormal() {
+    const inicio = Date.now();
+    localStorage.setItem("inicioTarefa1", inicio);
+    setModoSabotagem(false)
+
+
+
+    const time = document.getElementById("tempoTarefa1");
+    time.textContent = "00:00";
+
+}
 
 window.addEventListener("storage", (event) => {
     if (event.key === "fimTarefa") {
