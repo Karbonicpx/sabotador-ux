@@ -2,6 +2,7 @@
 let products = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 const area = document.getElementById('checkout-area');
+
 function renderProducts() {
     area.innerHTML = "";
 
@@ -15,6 +16,7 @@ function renderProducts() {
     });
 
     products.forEach(p => {
+        const sabotado = localStorage.getItem("modoSabotado") === "true";
         const card = document.createElement('div');
         card.className = 'product-card';
 
@@ -36,7 +38,7 @@ function renderProducts() {
 
               <div class="qty" data-id="${p.id}">
                   <button data-action="dec">−</button>
-                  <input type="text" value="${p.quantidade}" />
+                  <input type="text" value="${p.quantidade}" ${sabotado ? 'readonly' : ''}/>
                   <button data-action="inc">+</button>
               </div>
           </div>
