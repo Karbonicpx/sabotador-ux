@@ -77,7 +77,6 @@ class Banner {
       }
     };
 
-    // guarda referência para possível remoção futura
     this._updateFn = update;
 
     // define inicialmente e adiciona listeners para atualizar ao redimensionar/rotacionar
@@ -89,16 +88,15 @@ class Banner {
   }
 }
 
-// exemplo de uso com 5 tamanhos (ajuste caminhos conforme seus arquivos)
 const meuBanner = new Banner({
   imagens: [
-    { path: "../images/banner-480x640", width: 480 },
-    { path: "../images/banner-800x450", width: 800 },
-    { path: "../images/banner-1200x800", width: 1200 },
-    { path: "../images/banner-1920x600", width: 1920 },
-    { path: "../images/banner-3440x900", width: 3440 }
+    { path: "../images/Banners/banner-480x640", width: 480 },
+    { path: "../images/Banners/banner-800x450", width: 800 },
+    { path: "../images/Banners/banner-1200x800", width: 1200 },
+    { path: "../images/Banners/banner-1920x600", width: 1920 },
+    { path: "../images/Banners/banner-3440x900", width: 3440 }
   ],
-  formato: "png",
+  formato: "jpg",
   qtdPontos: 4
 });
 
