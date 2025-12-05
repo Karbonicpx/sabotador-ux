@@ -77,6 +77,7 @@ class Banner {
       }
     };
 
+    // guarda referência para possível remoção futura
     this._updateFn = update;
 
     // define inicialmente e adiciona listeners para atualizar ao redimensionar/rotacionar
@@ -243,8 +244,5 @@ closeBtn.addEventListener("click", function (event) {
   spamBanner.style.display = "none";
   overlay_popup.style.display = "none";
 });
-
-
-
 
 // =========================

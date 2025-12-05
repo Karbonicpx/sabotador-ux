@@ -7,19 +7,22 @@ body, html {
 }
 
 /* HEADER */
+
 header {
     background-color: #fee600;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    width: 100%;
-    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    flex-wrap: nowrap;
+    padding: 5px 5vw;
+    border-bottom: 1px solid #ccc;
 }
 
 .home_logo img {
-    height: 50px;
-    width: auto;
+    height: 70px;
 }
 
 .navbar_icons {
@@ -28,8 +31,8 @@ header {
 }
 
 .navbar_icons .icon img {
-    height: 30px;
-    width: auto;
+    width: 40px;
+    height: 40px;
 }
 
 /* LAYOUT PRINCIPAL */
