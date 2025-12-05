@@ -113,6 +113,7 @@ class CardProduto {
   adicionarAoCarrinho() {
     // Recupera o carrinho atual do localStorage ou cria um array vazio
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    const modoSabotado = localStorage.getItem("modoSabotado");
 
     // Cria o objeto produto com todas as informações
     const produto = {
@@ -129,19 +130,21 @@ class CardProduto {
 
     // Verifica se o produto já existe no carrinho
     const produtoExistente = carrinho.find(item =>
-      item.nome === this.nome && item.cor === this.cor
+      item.nome === this.nome && item.cor === this.cor && item.rgb === this.rgb
     );
 
     if (!produtoExistente) {
       // Se não existe, joga o produto no carrinho
       carrinho.push(produto);
     }
+    else if(modoSabotado === "false"){
+      produtoExistente.quantidade = (produtoExistente.quantidade || 1) + 1;
+    }
 
     // Salva no localStorage
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
     // Feedback visual apenas no modo normal
-    const modoSabotado = localStorage.getItem("modoSabotado");
     if(modoSabotado === "false")
     {
       this.mostrarFeedback();
@@ -165,10 +168,10 @@ class CardProduto {
 
     document.body.appendChild(feedback);
 
-    // Remove o feedback após 2 segundos
+    // Remove o feedback após 2 segundos //alterado para 1
     setTimeout(() => {
       document.body.removeChild(feedback);
-    }, 2000);
+    }, 1000);
   }
 }
 function pesquisar() {

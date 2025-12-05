@@ -140,7 +140,7 @@ function showMessage(message) {
         if (messageEl.parentNode) {
             messageEl.remove();
         }
-    }, 3000);
+    }, 1000);//alterado para 1 segundo
 }
 
 // Atualiza quantidade no localStorage
