@@ -88,7 +88,8 @@ function renderProducts() {
 
 // Remove produto do carrinho
 function removeFromCart(productId) {
-    if (confirm('Tem certeza que deseja remover este produto do carrinho?')) {
+    const modoSabotado = localStorage.getItem("modoSabotado");
+    if (modoSabotado === "true"||confirm('Tem certeza que deseja remover este produto do carrinho?')) {
         // Remove do array products
         products = products.filter(p => p.id !== productId);
         
@@ -99,8 +100,12 @@ function removeFromCart(productId) {
         renderProducts();
         updateTotal();
         
-        // Mostra mensagem de feedback
-        showMessage('Produto removido do carrinho!');
+    // Mostra mensagem de feedback no modo normal        
+    if(modoSabotado === "false")
+    {
+      showMessage('Produto removido do carrinho!');
+    }
+        
     }
 }
 

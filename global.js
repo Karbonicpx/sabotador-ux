@@ -140,7 +140,7 @@ class CardProduto {
     // Salva no localStorage
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-    // Feedback visual 
+    // Feedback visual apenas no modo normal
     const modoSabotado = localStorage.getItem("modoSabotado");
     if(modoSabotado === "false")
     {
