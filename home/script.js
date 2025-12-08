@@ -24,8 +24,30 @@ if (!modoSabotado) {
 }
 
 
+
+
 definirDescricao()
 
+// =========================
+// DESCRIÇÃO - BOTÃO DE OLHO
+// =========================
+
+const descricaoArea = document.getElementById("descricao-area");
+const eyeIcon = document.getElementById("eye-icon");
+
+document.getElementById("descricao-toggle").addEventListener("click", () => {
+  const visivel = descricaoArea.classList.contains("visible");
+  
+  if (visivel) {
+    // esconder
+    descricaoArea.classList.remove("visible");
+    eyeIcon.src = "../images/eye-open.png";
+  } else {
+    // mostrar
+    descricaoArea.classList.add("visible");
+    eyeIcon.src = "../images/eye-closed.png";
+  }
+});
 
 // =========================
 // CLASSE: Banner
