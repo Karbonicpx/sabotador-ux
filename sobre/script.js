@@ -1,6 +1,20 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const btnNormal = document.getElementById("btn-normal");
+    const btnSabotado = document.getElementById("btn-sabotado");
+
+    btnNormal.addEventListener("click", () => {
+        iniciarTarefaNormal();
+    });
+
+    btnSabotado.addEventListener("click", () => {
+        iniciarTarefaSabotada();
+    });
+});
+
+
 let intervaloTempo;
 
-function IniciarTarefaSabotada() {
+function iniciarTarefaSabotada() {
     const inicio = Date.now();
     localStorage.setItem("inicioTarefa2", inicio);
     setModoSabotagem(true)
@@ -24,8 +38,8 @@ function IniciarTarefaSabotada() {
         time.textContent = `${minutos}:${segundos}`;
     }, 1000);
 }
-//temporário para testar sabotagem
-function IniciarTarefaNormal() {
+
+function iniciarTarefaNormal() {
     const inicio = Date.now();
     localStorage.setItem("inicioTarefa1", inicio);
     setModoSabotagem(false)
