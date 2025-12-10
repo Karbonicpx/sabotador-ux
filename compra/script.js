@@ -118,8 +118,108 @@ function escapeHtml(s) {
 }
 
 function confirmarCompra() {
-    alert('Compra confirmada!');
-    localStorage.removeItem('cartItems'); // Limpa o carrinho
-    localStorage.removeItem('carrinho'); // Limpa também o carrinho original se existir
-    window.location.href = "../home/index.html"; // Volta para home
+    const modoSabotado = localStorage.getItem("modoSabotado") === "true";
+
+    const produtos = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    if (!produtos.length) {
+        alert("Erro: produtos não encontrados.");
+        return;
+    }
+
+    const STORAGE_KEY = "resultados";
+    const resultadosSalvos =
+        JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+            normal: {},
+            sabotado: {}
+        };
+
+    const modoKey = modoSabotado ? "sabotado" : "normal";
+
+    // =============================
+    // MISSÃO 1 — CONTAGEM
+    // =============================
+    let respostaCorretaMissao1Normal = 5;
+    let respostaCorretaMissao1Sabotado = 2;
+
+    let respostaCorretaMissao;
+    let respostaUsuarioMissao1;
+
+    if (!modoSabotado) {
+        respostaUsuarioMissao1 = localStorage.getItem("missao1_mouses_normal");
+        respostaCorretaMissao = respostaCorretaMissao1Normal;
+
+
+    } else {
+        respostaUsuarioMissao1 = localStorage.getItem("missao1_mouses_sabotado");
+        respostaCorretaMissao = respostaCorretaMissao1Sabotado;
+    }
+
+    resultadosSalvos[modoKey].missao1 = {
+        respostaCorreta: respostaCorretaMissao,
+        respostaUsuario: Number(respostaUsuarioMissao1),
+        sucesso:
+            Number(respostaUsuarioMissao1) === respostaCorretaMissao,
+    };
+
+    // =============================
+    // MISSÃO 2 — ITENS NO CARRINHO
+    // =============================
+
+    const missoesStorage = JSON.parse(
+        localStorage.getItem("missoesProdutos")
+    );
+
+    // lista de itens da missão de acordo com o modo
+    const listaMissao = missoesStorage?.[modoKey] || [];
+
+    const sucessoMissao2 = listaMissao.every(itemMissao => {
+        const itemCarrinho = produtos.find(
+            p => p.nome === itemMissao.nome
+        );
+
+        return itemCarrinho && itemCarrinho.quantidade >= itemMissao.quantidade;
+    });
+
+    resultadosSalvos[modoKey].missao2 = {
+        sucesso: sucessoMissao2
+    };
+
+    // =============================
+    // MISSÃO 3 — FORMA DE PAGAMENTO
+    // =============================
+
+    const formaPagamento = document.getElementById("metodoPagamento")?.value;
+    if (!formaPagamento) {
+        alert("Por favor, selecione uma forma de pagamento.");
+        return;
+    }
+    const sucessoMissao3 = formaPagamento === "cartao";
+
+    resultadosSalvos[modoKey].missao3 = {
+        formaPagamento,
+        sucesso: sucessoMissao3,
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(resultadosSalvos));
+
+    if (modoSabotado) {
+        localStorage.setItem("fimTarefa2", Date.now());
+
+    } else {
+        localStorage.setItem("fimTarefa1", Date.now());
+    }
+
+    console.log("resultadosSalvos", resultadosSalvos);
+    alert(
+        resultadosSalvos[modoKey].missao1.sucesso &&
+            resultadosSalvos[modoKey].missao2.sucesso &&
+            resultadosSalvos[modoKey].missao3.sucesso
+            ? "Compra finalizada com sucesso! Todas as missões concluídas ✅"
+            : "Compra finalizada, mas uma ou mais missões falharam ❌"
+    );
+
+    window.close();
 }
+
+

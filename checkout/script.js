@@ -55,11 +55,15 @@ function renderProducts() {
     // Eventos dos botões + e -
     document.querySelectorAll('.qty button').forEach(btn => {
         btn.addEventListener('click', e => {
+            sabotado = localStorage.getItem("modoSabotado") === "true";
             const card = e.target.closest('.qty');
             const input = card.querySelector('input');
-            let val = parseInt(input.value) || 1;
-
-            val += e.target.dataset.action === 'inc' ? 1 : -1;
+            let val = parseFloat(input.value) || 1;
+            if (sabotado)
+                val += e.target.dataset.action === 'inc' ? 0.1 : -0.15;
+            else {
+                val += e.target.dataset.action === 'inc' ? 1 : -1;
+            }
             if (val < 1) val = 1;
             input.value = val;
 

@@ -211,13 +211,35 @@ class CardProduto {
     if (!descricaoTexto) return;
 
     const modoSabotado = localStorage.getItem("modoSabotado") === "true";
+    const missoes = JSON.parse(localStorage.getItem("missoesProdutos"));
+
+    if (!missoes) {
+      descricaoTexto.innerHTML = "<p>Missão indisponível.</p>";
+      return;
+    }
+
+    const produtosMissao = modoSabotado
+      ? missoes.sabotado
+      : missoes.normal;
+
+    const listaProdutosHTML = produtosMissao
+      .map(
+        (produto) =>
+          `<li>${produto.nome} — ${produto.quantidade} unidade(s)</li>`
+      )
+      .join("");
 
     descricaoTexto.innerHTML = `
     <span class="titulo-tarefas">Missão:</span>
     <ol class="lista-tarefas">
-      <li>
-        Verifique quantos mouses da <strong>Logitech</strong> possuem preço superior a 
-        <strong>R$ 200,00</strong>.
+
+        ${modoSabotado ? `<li>
+              Verifique <strong>quantos teclados da ReDragon</strong> possuem
+              <strong>preço inferior a R$ 800,00 e sem RGB</strong>.
+            </li>` : ` <li>
+              Verifique <strong>quantos mouses da Logitech</strong> possuem
+              <strong>preço superior a R$ 200,00 e com RGB</strong>.
+            </li>`} 
         <div class="input-missao">
           <label for="qtd-mouses">Quantidade encontrada:</label>
           <input 
@@ -232,20 +254,20 @@ class CardProduto {
       <li>
         Realize a compra da seguinte lista:
         <ul>
-          <li>Mouse — 2 unidades</li>
-          <li>Teclado — 3 unidades</li>
-          <li>Headset — 1 unidade</li>
+          ${listaProdutosHTML}
         </ul>
       </li>
 
       <li>
         Finalize a compra utilizando <strong>cartão de crédito</strong>.
       </li>
+
     </ol>
   `;
 
     configurarInputMissao(modoSabotado);
   }
+
   function configurarInputMissao(modoSabotado) {
     const input = document.getElementById("qtd-mouses");
     if (!input) return;
@@ -304,6 +326,8 @@ class CardProduto {
     const usuario = usuarioInput.value.trim();
     const senha = senhaInput.value.trim();
 
+    const sabotado = localStorage.getItem("modoSabotado") === "true";
+
     if (usuario === "admin" && senha === "admin") {
       overlayLogin.style.display = "none";
       localStorage.setItem("loginRealizado", "true");
@@ -311,6 +335,11 @@ class CardProduto {
     }
 
     msg.textContent = "Tente aquele login padrão do seu roteador";
+
+    if (!sabotado) {
+      msg.textContent += " (dica: é admin/admin)";
+      msg.style.color = "red";
+    }
   }
 
 

@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+
     const btnIniciar = document.getElementById("btn-iniciar-teste");
     const modal = document.getElementById("modal-teste");
 
@@ -44,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function concluirFase2() {
         modal.classList.add("hidden");
-        alert("Teste concluído. Obrigado pela participação!");
+        // Redireciona para a página de resultados
+        window.location.href = "../resultado/index.html";
     }
 });
 
@@ -60,7 +63,7 @@ function iniciarTarefaNormal() {
     iniciarTarefa({
         keyInicio: "inicioTarefa1",
         tempoElementId: "tempoTarefa1",
-        sabotado: true,
+        sabotado: false,
         iniciarTimer: true
     });
 }
@@ -92,6 +95,8 @@ function iniciarTarefa({ keyInicio, tempoElementId, sabotado, iniciarTimer }) {
 function resetarLocalStorageParaTarefa() {
     localStorage.removeItem("carrinho");
     localStorage.removeItem("loginRealizado");
+    localStorage.removeItem("missao1_mouses_normal");
+    localStorage.removeItem("missao1_mouses_sabotado");
 }
 
 
@@ -141,8 +146,75 @@ function atualizarTempo(elementId, milissegundos) {
 
     el.textContent = `${minutos}:${segundos}`;
 }
+const STORAGE_KEY_MISSAO = "missoesProdutos";
 
+function carregarProdutos() {
+    console.log("Carregando produtos para missão...");
 
+    // Se já existe no localStorage, usa direto
+    const missoesSalvas = localStorage.getItem(STORAGE_KEY_MISSAO);
+    if (missoesSalvas) {
+        const { sabotado, normal } = JSON.parse(missoesSalvas);
+        renderizarProdutosMissao("lista-missao-sabotada", sabotado);
+        renderizarProdutosMissao("lista-missao-normal", normal);
+        return;
+    }
+
+    fetch("../produtos.json")
+        .then(res => {
+            if (!res.ok) throw new Error("JSON não encontrado");
+            return res.json();
+        })
+        .then(data => {
+            const produtos = data.dados;
+
+            // Embaralha produtos
+            const embaralhados = [...produtos].sort(() => Math.random() - 0.5);
+
+            const produtosSabotado = embaralhados
+                .slice(0, 3)
+                .map(produto => ({
+                    ...produto,
+                    quantidade: getRandomInt(1, 5)
+                }));
+
+            const produtosNormal = embaralhados
+                .slice(3, 6)
+                .map(produto => ({
+                    ...produto,
+                    quantidade: getRandomInt(1, 5)
+                }));
+
+            // Salva no localStorage
+            localStorage.setItem(
+                STORAGE_KEY_MISSAO,
+                JSON.stringify({
+                    sabotado: produtosSabotado,
+                    normal: produtosNormal
+                })
+            );
+
+            renderizarProdutosMissao("lista-missao-sabotada", produtosSabotado);
+            renderizarProdutosMissao("lista-missao-normal", produtosNormal);
+        })
+        .catch(err => console.error("Erro ao carregar produtos:", err));
+}
+function renderizarProdutosMissao(elementId, produtos) {
+    const ul = document.getElementById(elementId);
+    if (!ul) return;
+
+    ul.innerHTML = "";
+
+    produtos.forEach(produto => {
+        const li = document.createElement("li");
+        li.textContent = `${produto.nome} – Quantidade: ${produto.quantidade} – Preço: ${produto.preco}`;
+        ul.appendChild(li);
+    });
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 window.addEventListener("storage", (event) => {
     if (event.key !== "fimTarefa") return;
@@ -154,3 +226,6 @@ window.addEventListener("storage", (event) => {
     atualizarTempo("tempoTarefa2", duracao);
     pararCronometro();
 });
+
+
+carregarProdutos();
