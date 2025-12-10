@@ -11,11 +11,6 @@
 
 
 
-  const usuarioInput = $("usuario");
-  const senhaInput = $("senha");
-  const entrarBtn = $("entrarBtn");
-  const msg = $("msg");
-
   const searchBox = $("search-box");
   const spamBanner = $("spam-banner");
   const closeBtn = $("close-banner");
@@ -27,18 +22,25 @@
   function init() {
     configurarModoSabotado();
     carregarProdutos();
-    configurarLogin();
     configurarPopupChato();
   }
 
   function configurarModoSabotado() {
-    if (!modoSabotado) {
+    loginRealizado = localStorage.getItem("loginRealizado") === "true";
+
+    if (loginRealizado) {
       overlayLogin.style.display = "none";
       overlayPopup.style.display = "none";
       return;
     }
 
-    overlayLogin.style.display = "flex";
+    if (!modoSabotado) {
+      overlayLogin.style.display = "flex";
+      overlayPopup.style.display = "none";
+      return;
+    }
+
+    overlayLogin.style.display = "none";
     overlayPopup.style.display = "none";
   }
 
@@ -91,28 +93,7 @@
     });
   }
 
-  // ============================================
-  // LOGIN CHATO
-  // ============================================
-  function configurarLogin() {
-    entrarBtn.addEventListener("click", tentarLogin);
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") tentarLogin();
-    });
-  }
-
-  function tentarLogin() {
-    const usuario = usuarioInput.value.trim();
-    const senha = senhaInput.value.trim();
-
-    if (usuario === "admin" && senha === "admin") {
-      overlayLogin.style.display = "none";
-      return;
-    }
-
-    msg.textContent = "Tente aquele login padrão do seu roteador";
-  }
 
   // ============================================
   // POPUP / SPAM CHAT0

@@ -14,6 +14,12 @@ main {
     overflow: auto;
 }
 
+.no-products-carrinho {
+    font-size: 18px;
+    color: #555;
+    margin-top: 50px;
+}
+
 /* ======== ESTILO DO CARD ======== */
 .product-card {
     width: 100%;

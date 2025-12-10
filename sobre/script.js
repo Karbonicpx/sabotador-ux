@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function iniciarFase1() {
-        setModoSabotagem(false);
+        setModoSabotagem(true);
         localStorage.setItem("inicioTarefa1", Date.now());
     }
 
@@ -79,12 +79,19 @@ function iniciarTarefa({ keyInicio, tempoElementId, sabotado, iniciarTimer }) {
     salvarInicio(keyInicio);
     setModoSabotagem(sabotado);
     resetarTempo(tempoElementId);
+    resetarLocalStorageParaTarefa();
     console.log("Tarefa iniciada:", keyInicio, "Sabotado:", sabotado);
     if (iniciarTimer) {
         iniciarCronometro(keyInicio, tempoElementId);
     } else {
         pararCronometro();
     }
+
+}
+
+function resetarLocalStorageParaTarefa() {
+    localStorage.removeItem("carrinho");
+    localStorage.removeItem("loginRealizado");
 }
 
 
@@ -113,10 +120,6 @@ function salvarInicio(key) {
 
 function obterInicio(key) {
     return Number(localStorage.getItem(key));
-}
-
-function setModoSabotagem(isSabotado) {
-    localStorage.setItem("modoSabotado", isSabotado ? "true" : "false");
 }
 
 function resetarTempo(elementId) {

@@ -278,10 +278,58 @@ class CardProduto {
     });
   }
 
+  // ============================================
+  // LOGIN CHATO
+  // ============================================
+  const overlayLogin = document.getElementById("overlay_login");
+  const usuarioInput = document.getElementById("usuario");
+  const senhaInput = document.getElementById("senha");
+  const entrarBtn = document.getElementById("entrarBtn");
+  const msg = document.getElementById("msg");
+
+  function configurarLogin() {
+    if (!overlayLogin || !usuarioInput || !senhaInput || !entrarBtn || !msg)
+      return;
+    entrarBtn.addEventListener("click", tentarLogin);
+
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") tentarLogin();
+    });
+  }
+
+  function tentarLogin() {
+    const usuario = usuarioInput.value.trim();
+    const senha = senhaInput.value.trim();
+
+    if (usuario === "admin" && senha === "admin") {
+      overlayLogin.style.display = "none";
+      localStorage.setItem("loginRealizado", "true");
+      return;
+    }
+
+    msg.textContent = "Tente aquele login padrão do seu roteador";
+  }
+
+
+  function configurarBtnLogin() {
+    const btnLogin = document.getElementById("loginBtn");
+    if (!btnLogin) return;
+    btnLogin.addEventListener("click", () => {
+      if (localStorage.getItem("loginRealizado") === "true") {
+        alert("Você já realizou o login com êxito anteriormente.");
+        return;
+      }
+      overlayLogin.style.display = "flex";
+    });
+  }
+
 
   function init() {
+    configurarLogin();
     definirDescricao();
     configurarDescricaoToggle();
+    configurarBtnLogin();
   }
 
   init();

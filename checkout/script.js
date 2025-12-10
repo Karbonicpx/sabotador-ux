@@ -4,7 +4,7 @@ let products = JSON.parse(localStorage.getItem("carrinho")) || [];
 const area = document.getElementById('checkout-area');
 
 function renderProducts() {
-    area.innerHTML = "";
+    area.innerHTML = '';
 
     // Adiciona IDs únicos se não existirem e garante a propriedade quantidade
     products = products.map((p, index) => {
@@ -14,7 +14,8 @@ function renderProducts() {
             quantidade: p.quantidade || 1 // Garante que tem quantidade
         };
     });
-
+    if (products.length === 0)
+        area.innerHTML = "<div class='no-products-carrinho'>Não há produtos no carrinho.</div>";
     products.forEach(p => {
         const sabotado = localStorage.getItem("modoSabotado") === "true";
         const card = document.createElement('div');
@@ -233,7 +234,17 @@ function parsePrice(priceString) {
     return parseFloat(cleaned) || 0;
 }
 
+const checkoutBtn = document.getElementById('checkout-btn');
+checkoutBtn.addEventListener('click', finalizarTarefa);
+
 function finalizarTarefa() {
+    const loginRealizado = localStorage.getItem("loginRealizado");
+    if (loginRealizado !== "true") {
+        alert("Por favor, realize o login antes de finalizar a compra.");
+
+        return;
+    }
+
     if (products.length === 0) {
         alert("Seu carrinho está vazio. Adicione produtos antes de finalizar a compra.");
         return;
@@ -261,5 +272,18 @@ function finalizarTarefa() {
     window.location.href = "../compra/index.html";
 }
 
-// Renderiza tudo
+function aoSairDoCheckout() {
+    const sabotado = localStorage.getItem("modoSabotado") === "true";
+    if (sabotado) {
+        localStorage.removeItem("carrinho");
+    }
+
+}
+
+window.addEventListener("beforeunload", function () {
+    aoSairDoCheckout();
+});
+
+
+
 renderProducts();
