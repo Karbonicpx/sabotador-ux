@@ -188,6 +188,8 @@ class CardProduto {
     const termo = document.getElementById("search-box").value.trim();
     if (!termo) return;
 
+
+
     window.location.href = `../search/index.html?busca=${encodeURIComponent(
       termo
     )}`;

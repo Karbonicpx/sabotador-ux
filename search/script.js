@@ -1,46 +1,68 @@
-
 window.addEventListener("DOMContentLoaded", () => {
+  /* =========================
+     CONFIGURAÇÃO GLOBAL
+  ========================== */
+  const sabotado = localStorage.getItem("modoSabotado") === "true";
+
+  if (window.innerWidth <= 768) {
+    document.getElementById("filtros").classList.add("hidden");
+  }
+
   let produtos = [];
+
+  const filtros = {
+    categoria: [],
+    marca: [],
+    rgb: [],
+    cor: [],
+    avaliacao: []
+  };
+
+  /* =========================
+     ELEMENTOS DOM
+  ========================== */
+  const searchBar = document.getElementById("searchBar");
+  const gridProdutos = document.getElementById("produtos-grid");
+
+  const precoMinInput = document.getElementById("preco-min");
+  const precoMaxInput = document.getElementById("preco-max");
+  const precoRange = document.getElementById("preco-range");
+  const precoRangeValor = document.getElementById("preco-range-valor");
+
+  const painelFiltros = document.getElementById("filtros");
+  const btnToggleFiltros = document.getElementById("toggle-filtros");
+
+  /* =========================
+     FETCH PRODUTOS
+  ========================== */
   fetch("../produtos.json")
     .then(res => {
-      if (!res.ok) {
-        throw new Error(`Erro HTTP! status: ${res.status}`);
-      }
+      if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`);
       return res.json();
     })
     .then(data => {
-      produtos = data.dados;
-
-      // CORREÇÃO: Ajustar caminhos das imagens
-      produtos = produtos.map(produto => ({
+      produtos = data.dados.map(produto => ({
         ...produto,
         imagem: produto.imagem.replace("images/", "../images/")
       }));
-      const busca = getParametro("busca");
-      if (busca) {
-        const input = document.getElementById("searchBar");
-        input.value = busca;
+
+      const buscaURL = getParametro("busca");
+      if (buscaURL) {
+        searchBar.value = buscaURL;
         aplicarFiltros();
       } else {
         renderizarProdutos(produtos);
       }
     })
-    .catch(err => {
-      console.error("Erro ao carregar produtos.json:", err);
-    });
+    .catch(err => console.error("Erro ao carregar produtos:", err));
 
   function renderizarProdutos(lista) {
-    const grid = document.getElementById("produtos-grid");
+    if (!gridProdutos) return;
 
-    if (!grid) {
-      console.error("Elemento #produtos-grid não encontrado!");
-      return;
-    }
+    gridProdutos.innerHTML = "";
 
-    grid.innerHTML = "";
-
-    if (lista.length === 0) {
-      grid.innerHTML = "<p>Nenhum produto encontrado</p>";
+    if (!lista.length) {
+      gridProdutos.innerHTML = "<p>Nenhum produto encontrado</p>";
       return;
     }
 
@@ -49,7 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
         nome: item.nome,
         descricao: item.descricao,
         preco: item.preco,
-        imagem: "../images/Produtos/" + item.categoria + "/" + item.cor + ".png",
+        imagem: `../images/Produtos/${item.categoria}/${item.cor}.png`,
         categoria: item.categoria,
         marca: item.marca,
         rgb: item.rgb,
@@ -59,76 +81,167 @@ window.addEventListener("DOMContentLoaded", () => {
         altura: "150px"
       });
 
-      grid.appendChild(card.render());
+      gridProdutos.appendChild(card.render());
     });
-
   }
 
-  // Sistema de filtros
-  const filtros = {
-    categoria: [],
-    marca: [],
-    rgb: [],
-    cor: [],
-    avaliacao: []
-  };
-
-  document.querySelectorAll("input[type=checkbox]").forEach(input => {
-    input.addEventListener("change", () => {
-      const tipo = input.classList[0].split("-")[1];
-      filtros[tipo] = Array.from(document.querySelectorAll(`.filtro-${tipo}:checked`)).map(i => i.value);
-      aplicarFiltros();
-    });
-  });
-
-  document.getElementById("searchBar").addEventListener("input", aplicarFiltros);
-
   function aplicarFiltros() {
-    const busca = document.getElementById("searchBar").value.toLowerCase();
+    let busca = searchBar.value.toLowerCase();
 
-    const filtrados = produtos.filter(p => {
-      const nomeMatch = p.nome.toLowerCase().includes(busca);
+    if (sabotado) {
+      delayArtificial(200);
+      if (busca.length > 5) busca = busca.slice(0, 5);
+    }
 
-      const categoriaMatch = filtros.categoria.length ? filtros.categoria.includes(p.categoria) : true;
-      const marcaMatch = filtros.marca.length ? filtros.marca.includes(p.marca) : true;
-      const rgbMatch = filtros.rgb.length ? filtros.rgb.includes(p.rgb) : true;
-      const corMatch = filtros.cor.length ? filtros.cor.includes(p.cor) : true;
+    const precoMin = Number(precoMinInput.value) || 0;
+    const precoMax = Number(precoMaxInput.value) || Infinity;
 
-      let avaliacaoMatch = true;
-      if (filtros.avaliacao.length) {
-        const avalSelecionadas = filtros.avaliacao.map(Number); // ['5','4'] -> [5,4]
-        avaliacaoMatch = avalSelecionadas.includes(Number(p.avaliacao));
-      }
-      return nomeMatch && categoriaMatch && marcaMatch && rgbMatch && corMatch && avaliacaoMatch;
+    const filtrados = produtos.filter(produto => {
+      const nomeMatch = produto.nome.toLowerCase().includes(busca);
+
+      const categoriaMatch = filtros.categoria.length
+        ? filtros.categoria.includes(produto.categoria)
+        : true;
+
+      const marcaMatch = filtros.marca.length
+        ? filtros.marca.includes(produto.marca)
+        : true;
+
+      const rgbMatch = filtros.rgb.length
+        ? filtros.rgb.includes(produto.rgb)
+        : true;
+
+      const corMatch = filtros.cor.length
+        ? filtros.cor.includes(produto.cor)
+        : true;
+
+      const avaliacaoMatch = filtros.avaliacao.length
+        ? filtros.avaliacao.map(Number).includes(Number(produto.avaliacao))
+        : true;
+
+      const precoProduto = parsePreco(produto.preco);
+      const precoMatch = precoProduto >= precoMin && precoProduto <= precoMax;
+
+      return (
+        nomeMatch &&
+        categoriaMatch &&
+        marcaMatch &&
+        rgbMatch &&
+        corMatch &&
+        avaliacaoMatch &&
+        precoMatch
+      );
     });
 
     renderizarProdutos(filtrados);
   }
 
+  document.querySelectorAll("input[type=checkbox]").forEach(input => {
+    input.addEventListener("change", () => {
+      const tipoAtual = input.classList[0].split("-")[1];
 
-  function getParametro(nome) {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(nome);
+      filtros[tipoAtual] = Array.from(
+        document.querySelectorAll(`.filtro-${tipoAtual}:checked`)
+      ).map(i => i.value);
+
+      if (sabotado) {
+        delayArtificial(300);
+
+        Object.keys(filtros).forEach(tipo => {
+          if (tipo !== tipoAtual) {
+            filtros[tipo] = [];
+
+            document
+              .querySelectorAll(`.filtro-${tipo}`)
+              .forEach(cb => (cb.checked = false));
+          }
+        });
+      }
+
+      aplicarFiltros();
+    });
+  });
+
+  searchBar.addEventListener("input", aplicarFiltros);
+
+  configurarPreco();
+
+  function configurarPreco() {
+    precoRange.value = 2000;
+
+    if (sabotado) {
+      precoRange.min = 1;
+      precoRange.max = 10_000_000_000;
+      precoRange.value = 10000;
+
+      precoMinInput.style.display = "none";
+      precoMaxInput.style.display = "none";
+      document.getElementById("span-price").style.display = "none";
+    }
+
+    atualizarTexto(precoRange.value);
+
+    precoRange.addEventListener("input", () => {
+      precoMaxInput.value = precoRange.value;
+      atualizarTexto(precoRange.value);
+      aplicarFiltros();
+    });
+
+    precoMinInput.addEventListener("change", normalizarValores);
+    precoMaxInput.addEventListener("change", normalizarValores);
   }
 
-  // Toggle filtros
-  const btnToggleFiltros = document.getElementById("toggle-filtros");
-  const painelFiltros = document.getElementById("filtros");
+  function normalizarValores() {
+    const PRECO_MIN = Number(precoRange.min);
+    const PRECO_MAX = Number(precoRange.max);
+
+    let min = Number(precoMinInput.value) || PRECO_MIN;
+    let max = Number(precoMaxInput.value) || precoRange.value;
+
+    if (min < PRECO_MIN) min = PRECO_MIN;
+    if (max > PRECO_MAX) max = PRECO_MAX;
+    if (min > max) min = max;
+
+    precoMinInput.value = min;
+    precoMaxInput.value = max;
+    precoRange.value = max;
+
+    atualizarTexto(max);
+    aplicarFiltros();
+  }
+
+  function atualizarTexto(valor) {
+    precoRangeValor.textContent = valor;
+  }
+
+
   btnToggleFiltros.addEventListener("click", () => {
     painelFiltros.classList.toggle("hidden");
   });
 
-  // Adiciona evento para quando a tela for redimensionada 
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) {
-      painelFiltros.classList.remove("hidden");
-    }
-
-    if (window.innerWidth <= 768) {
-      painelFiltros.classList.add("hidden");
-    }
+    painelFiltros.classList.toggle("hidden", window.innerWidth <= 768);
   });
 
+  /* =========================
+     UTILITÁRIOS
+  ========================== */
+  function parsePreco(valor) {
+    return Number(
+      valor
+        .replace("R$", "")
+        .replace(".", "")
+        .replace(",", ".")
+        .trim()
+    );
+  }
+
+  function getParametro(nome) {
+    return new URLSearchParams(window.location.search).get(nome);
+  }
+
+  function delayArtificial(ms) {
+    const inicio = Date.now();
+    while (Date.now() - inicio < ms) { }
+  }
 });
-
-

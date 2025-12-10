@@ -60,7 +60,7 @@ function iniciarTarefaNormal() {
     iniciarTarefa({
         keyInicio: "inicioTarefa1",
         tempoElementId: "tempoTarefa1",
-        sabotado: false,
+        sabotado: true,
         iniciarTimer: true
     });
 }

@@ -35,69 +35,82 @@
   <main>
     <aside id="filtros">
       <h2>Filtros</h2>
+      <div class="filtros-content">
+        <div class="filtro">
+          <h3>Categoria</h3>
+          <label><input type="checkbox" value="Mouse" class="filtro-categoria" />
+            Mouse</label>
+          <label><input type="checkbox" value="Teclado" class="filtro-categoria" />
+            Teclado</label>
+          <label><input type="checkbox" value="Fone" class="filtro-categoria" />
+            Fone</label>
+        </div>
 
-      <div class="filtro">
-        <h3>Categoria</h3>
-        <label><input type="checkbox" value="Mouse" class="filtro-categoria" />
-          Mouse</label>
-        <label><input type="checkbox" value="Teclado" class="filtro-categoria" />
-          Teclado</label>
-        <label><input type="checkbox" value="Fone" class="filtro-categoria" />
-          Fone</label>
-      </div>
+        <div class="filtro">
+          <h3>Marca</h3>
+          <label><input type="checkbox" value="Logitech" class="filtro-marca" />
+            Logitech</label>
+          <label><input type="checkbox" value="Redragon" class="filtro-marca" />
+            Redragon</label>
+          <label><input type="checkbox" value="Razer" class="filtro-marca" />
+            Razer</label>
+          <label><input type="checkbox" value="Corsair" class="filtro-marca" />
+            Corsair</label>
+          <label><input type="checkbox" value="Hyperx" class="filtro-marca" />
+            Hyperx</label>
+          <label><input type="checkbox" value="Rog" class="filtro-marca" />
+            Rog</label>
+        </div>
 
-      <div class="filtro">
-        <h3>Marca</h3>
-        <label><input type="checkbox" value="Logitech" class="filtro-marca" />
-          Logitech</label>
-        <label><input type="checkbox" value="Redragon" class="filtro-marca" />
-          Redragon</label>
-        <label><input type="checkbox" value="Razer" class="filtro-marca" />
-          Razer</label>
-        <label><input type="checkbox" value="Corsair" class="filtro-marca" />
-          Corsair</label>
-        <label><input type="checkbox" value="Hyperx" class="filtro-marca" />
-          Hyperx</label>
-        <label><input type="checkbox" value="Rog" class="filtro-marca" />
-          Rog</label>
-      </div>
+        <div class="filtro">
+          <h3>RGB</h3>
+          <label><input type="checkbox" value="Sim" class="filtro-rgb" /> Sim</label>
+          <label><input type="checkbox" value="Não" class="filtro-rgb" /> Não</label>
+        </div>
 
-      <div class="filtro">
-        <h3>RGB</h3>
-        <label><input type="checkbox" value="Sim" class="filtro-rgb" /> Sim</label>
-        <label><input type="checkbox" value="Não" class="filtro-rgb" /> Não</label>
-      </div>
+        <div class="filtro">
+          <h3>Cor</h3>
+          <label><input type="checkbox" value="Preto" class="filtro-cor" />
+            Preto</label>
+          <label><input type="checkbox" value="Branco" class="filtro-cor" />
+            Branco</label>
+          <label><input type="checkbox" value="Cinza" class="filtro-cor" />
+            Cinza</label>
+          <label><input type="checkbox" value="Azul" class="filtro-cor" />
+            Azul</label>
+          <label><input type="checkbox" value="Verde" class="filtro-cor" />
+            Verde</label>
+          <label><input type="checkbox" value="Rosa" class="filtro-cor" />
+            Rosa</label>
+        </div>
 
-      <div class="filtro">
-        <h3>Cor</h3>
-        <label><input type="checkbox" value="Preto" class="filtro-cor" />
-          Preto</label>
-        <label><input type="checkbox" value="Branco" class="filtro-cor" />
-          Branco</label>
-        <label><input type="checkbox" value="Cinza" class="filtro-cor" />
-          Cinza</label>
-        <label><input type="checkbox" value="Azul" class="filtro-cor" />
-          Azul</label>
-        <label><input type="checkbox" value="Verde" class="filtro-cor" />
-          Verde</label>
-        <label><input type="checkbox" value="Rosa" class="filtro-cor" />
-          Rosa</label>
-      </div>
-
-      <div class="filtro">
-        <h3>Avaliação</h3>
-        <label>
-          <input type="checkbox" value="5" class="filtro-avaliacao" />
-          ★★★★★
-        </label>
-        <label>
-          <input type="checkbox" value="4" class="filtro-avaliacao" />
-          ★★★★
-        </label>
-        <label>
-          <input type="checkbox" value="3" class="filtro-avaliacao" />
-          ★★★
-        </label>
+        <div class="filtro">
+          <h3>Avaliação</h3>
+          <label>
+            <input type="checkbox" value="5" class="filtro-avaliacao" />
+            ★★★★★
+          </label>
+          <label>
+            <input type="checkbox" value="4" class="filtro-avaliacao" />
+            ★★★★
+          </label>
+          <label>
+            <input type="checkbox" value="3" class="filtro-avaliacao" />
+            ★★★
+          </label>
+        </div>
+        <div class="filtro">
+          <h3>Preço</h3>
+          <div class="preco-inputs">
+            <input type="number" id="preco-min" placeholder="Min" min="0">
+            <span id="span-price">–</span>
+            <input type="number" id="preco-max" placeholder="Max" min="0">
+          </div>
+          <input type="range" id="preco-range" min="0" max="2000" step="50" />
+          <span class="preco-valor">
+            Até R$ <strong id="preco-range-valor"></strong>
+          </span>
+        </div>
       </div>
     </aside>
 
