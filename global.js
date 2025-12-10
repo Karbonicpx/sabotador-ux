@@ -206,31 +206,62 @@ class CardProduto {
 
   function definirDescricao() {
     const descricaoTexto = document.getElementById("descricao-tarefa");
-
     if (!descricaoTexto) return;
+
     const modoSabotado = localStorage.getItem("modoSabotado") === "true";
 
-    if (modoSabotado) {
-      descricaoTexto.innerHTML = `
-      <span class='titulo-tarefas'>Tarefas a fazer:</span>
-      <ul class='lista-tarefas'>
-        <li>Realizar Login (pode falhar);</li>
-        <li>Comprar 2 Mouses (pode adicionar mais no carrinho);</li>
-        <li>Comprar 3 teclados (pode adicionar mais no carrinho);</li>
-        <li>Finalizar o pagamento (pode travar na finalização);</li>
-      </ul>`;
-      return;
+    descricaoTexto.innerHTML = `
+    <span class="titulo-tarefas">Missão:</span>
+    <ol class="lista-tarefas">
+      <li>
+        Verifique quantos mouses da <strong>Logitech</strong> possuem preço superior a 
+        <strong>R$ 200,00</strong>.
+        <div class="input-missao">
+          <label for="qtd-mouses">Quantidade encontrada:</label>
+          <input 
+            type="number" 
+            id="qtd-mouses" 
+            min="0"
+            placeholder="Ex: 3"
+          />
+        </div>
+      </li>
+
+      <li>
+        Realize a compra da seguinte lista:
+        <ul>
+          <li>Mouse — 2 unidades</li>
+          <li>Teclado — 3 unidades</li>
+          <li>Headset — 1 unidade</li>
+        </ul>
+      </li>
+
+      <li>
+        Finalize a compra utilizando <strong>cartão de crédito</strong>.
+      </li>
+    </ol>
+  `;
+
+    configurarInputMissao(modoSabotado);
+  }
+  function configurarInputMissao(modoSabotado) {
+    const input = document.getElementById("qtd-mouses");
+    if (!input) return;
+
+    const storageKey = modoSabotado
+      ? "missao1_mouses_sabotado"
+      : "missao1_mouses_normal";
+
+    const valorSalvo = localStorage.getItem(storageKey);
+    if (valorSalvo !== null) {
+      input.value = valorSalvo;
     }
 
-    descricaoTexto.innerHTML = `
-      <span class='titulo-tarefas'>Tarefas a fazer:</span>
-      <ul class='lista-tarefas'>
-        <li>Realizar Login;</li>
-        <li>Comprar 2 Mouses;</li>
-        <li>Comprar 3 teclados;</li>
-        <li>Finalizar o pagamento</li>
-      </ul>`;
+    input.addEventListener("change", () => {
+      localStorage.setItem(storageKey, input.value);
+    });
   }
+
 
   function configurarDescricaoToggle() {
     const descricaoArea = document.getElementById("descricao-area");
@@ -241,9 +272,12 @@ class CardProduto {
 
     descricaoToggle.addEventListener("click", () => {
       const aberta = descricaoArea.classList.toggle("visible");
-      eyeIcon.src = aberta ? "../images/eye-closed.png" : "../images/eye-open.png";
+      eyeIcon.src = aberta
+        ? "../images/eye-closed.png"
+        : "../images/eye-open.png";
     });
   }
+
 
   function init() {
     definirDescricao();
