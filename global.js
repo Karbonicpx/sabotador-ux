@@ -204,4 +204,52 @@ class CardProduto {
   if (footer)
     footer.appendChild(meuFooter.render());
 
+  function definirDescricao() {
+    const descricaoTexto = document.getElementById("descricao-tarefa");
+
+    if (!descricaoTexto) return;
+    const modoSabotado = localStorage.getItem("modoSabotado") === "true";
+
+    if (modoSabotado) {
+      descricaoTexto.innerHTML = `
+      <span class='titulo-tarefas'>Tarefas a fazer:</span>
+      <ul class='lista-tarefas'>
+        <li>Realizar Login (pode falhar);</li>
+        <li>Comprar 2 Mouses (pode adicionar mais no carrinho);</li>
+        <li>Comprar 3 teclados (pode adicionar mais no carrinho);</li>
+        <li>Finalizar o pagamento (pode travar na finalização);</li>
+      </ul>`;
+      return;
+    }
+
+    descricaoTexto.innerHTML = `
+      <span class='titulo-tarefas'>Tarefas a fazer:</span>
+      <ul class='lista-tarefas'>
+        <li>Realizar Login;</li>
+        <li>Comprar 2 Mouses;</li>
+        <li>Comprar 3 teclados;</li>
+        <li>Finalizar o pagamento</li>
+      </ul>`;
+  }
+
+  function configurarDescricaoToggle() {
+    const descricaoArea = document.getElementById("descricao-area");
+    const eyeIcon = document.getElementById("eye-icon");
+    const descricaoToggle = document.getElementById("descricao-toggle");
+
+    if (!descricaoToggle || !descricaoArea || !eyeIcon) return;
+
+    descricaoToggle.addEventListener("click", () => {
+      const aberta = descricaoArea.classList.toggle("visible");
+      eyeIcon.src = aberta ? "../images/eye-closed.png" : "../images/eye-open.png";
+    });
+  }
+
+  function init() {
+    definirDescricao();
+    configurarDescricaoToggle();
+  }
+
+  init();
+
 })();

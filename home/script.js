@@ -1,187 +1,157 @@
-// =========================
-// CONTROLE DE SABOTAGEM
-// =========================
+(() => {
+  // ============================================
+  // ESTADO GLOBAL E ELEMENTOS
+  // ============================================
+  const modoSabotado = localStorage.getItem("modoSabotado") === "true";
 
-const modoSabotado = localStorage.getItem("modoSabotado") === "true";
-const idMissao = localStorage.getItem("idMissao")
-const overlayLogin = document.getElementById("overlay_login");
-const overlayPopup = document.getElementById("overlay_popup");
+  const $ = (id) => document.getElementById(id);
 
-
-if (!modoSabotado) {
-
-
-  overlayLogin.style.display = "none";
-  overlayPopup.style.display = "none";
-} else {
-  // Exibir login
-  overlayLogin.style.display = "flex";
-
-  // Popup aparece só depois do clique no search-box,
-  // então deixamos ele invisível por padrão:
-  overlayPopup.style.display = "none";
-
-}
+  const overlayLogin = $("overlay_login");
+  const overlayPopup = $("overlay_popup");
 
 
 
+  const usuarioInput = $("usuario");
+  const senhaInput = $("senha");
+  const entrarBtn = $("entrarBtn");
+  const msg = $("msg");
 
-definirDescricao()
+  const searchBox = $("search-box");
+  const spamBanner = $("spam-banner");
+  const closeBtn = $("close-banner");
 
+  const produtosGrid = $("produtos-grid");
 
-const descricaoArea = document.getElementById("descricao-area");
-const eyeIcon = document.getElementById("eye-icon");
+  let bannerActivated = false;
 
-document.getElementById("descricao-toggle").addEventListener("click", () => {
-  const visivel = descricaoArea.classList.contains("visible");
-
-  if (visivel) {
-    descricaoArea.classList.remove("visible");
-    eyeIcon.src = "../images/eye-open.png";
-  } else {
-    descricaoArea.classList.add("visible");
-    eyeIcon.src = "../images/eye-closed.png";
-  }
-});
-
-
-
-// Tenta carregar do JSON externo (agora na pasta pai)
-fetch("../produtos.json")
-  .then(response => {
-    if (!response.ok) throw new Error("Arquivo JSON não encontrado");
-    return response.json();
-  })
-  .then(data => {
-    renderizarProdutos(data.dados);
-  })
-  .catch(error => {
-    console.warn("Usando dados locais por falha no JSON externo: ", error.message);
-    renderizarProdutos(dadosJSON.dados);
-  });
-
-
-// Função para definir a descrição de tarefas na pagina home, de acordo com a missão selecionada no sobre
-function definirDescricao() {
-  const descricaoTexto = document.getElementById("descricao-tarefa");
-
-  descricaoTexto.innerHTML =
-    "<span class='titulo-tarefas'>Tarefas a fazer:</span><ul class='lista-tarefas'><li>Realizar Login;</li><li>Comprar 2 Mouses;</li><li>Comprar 3 teclados;</li><li>Finalizar o pagamento</li></ul>";
-}
-
-// =========================
-// FUNÇÃO: RENDERIZAR PRODUTOS
-// =========================
-function renderizarProdutos(lista) {
-  const grid = document.getElementById("produtos-grid");
-
-  if (!grid) {
-    console.error("Elemento #produtos-grid não encontrado!");
-    return;
+  function init() {
+    configurarModoSabotado();
+    carregarProdutos();
+    configurarLogin();
+    configurarPopupChato();
   }
 
-  grid.innerHTML = "";
+  function configurarModoSabotado() {
+    if (!modoSabotado) {
+      overlayLogin.style.display = "none";
+      overlayPopup.style.display = "none";
+      return;
+    }
 
-  if (lista.length === 0) {
-    grid.innerHTML = "<p>Nenhum produto encontrado</p>";
-    return;
-  }
-  //alterado para a home exibir menos itens de maneira mais aleatória
-  const selecionados = [];
-
-  const startRandom = Math.floor(Math.random() * 31);
-  const start = lista.length > 0 ? startRandom % lista.length : 0;
-  // 18 fica ok em desktops maximizados, e em telas mais estreitas serve para demonstrar a responsividade
-  for (let i = start; selecionados.length < 18 && i < lista.length; i += 5) {
-    selecionados.push(lista[i]);
+    overlayLogin.style.display = "flex";
+    overlayPopup.style.display = "none";
   }
 
-  selecionados.forEach(item => {
-    const card = new CardProduto({
-      nome: item.nome,
-      descricao: item.descricao,
-      preco: item.preco,
-      imagem: "../images/Produtos/" + item.categoria + "/" + item.cor + ".png",
-      categoria: item.categoria,
-      marca: item.marca,
-      rgb: item.rgb,
-      cor: item.cor,
-      avaliacao: item.avaliacao,
-      largura: "180px",
-      altura: "150px"
+  // ============================================
+  // PRODUTOS
+  // ============================================
+  function carregarProdutos() {
+    fetch("../produtos.json")
+      .then((r) => {
+        if (!r.ok) throw new Error("JSON não encontrado");
+        return r.json();
+      })
+      .then((data) => renderizarProdutos(data.dados))
+      .catch(() => renderizarProdutos(dadosJSON?.dados ?? []));
+  }
+
+  function renderizarProdutos(lista) {
+    if (!produtosGrid) return console.error("#produtos-grid não encontrado!");
+
+    produtosGrid.innerHTML = "";
+
+    if (!lista.length) {
+      produtosGrid.innerHTML = "<p>Nenhum produto encontrado</p>";
+      return;
+    }
+
+    const selecionados = [];
+    const start = Math.floor(Math.random() * lista.length);
+
+    for (let i = start; selecionados.length < 18 && i < lista.length; i += 5) {
+      selecionados.push(lista[i]);
+    }
+
+    selecionados.forEach((item) => {
+      const card = new CardProduto({
+        nome: item.nome,
+        descricao: item.descricao,
+        preco: item.preco,
+        imagem: `../images/Produtos/${item.categoria}/${item.cor}.png`,
+        categoria: item.categoria,
+        marca: item.marca,
+        rgb: item.rgb,
+        cor: item.cor,
+        avaliacao: item.avaliacao,
+        largura: "180px",
+        altura: "150px",
+      });
+
+      produtosGrid.appendChild(card.render());
     });
+  }
 
-    grid.appendChild(card.render());
-  });
+  // ============================================
+  // LOGIN CHATO
+  // ============================================
+  function configurarLogin() {
+    entrarBtn.addEventListener("click", tentarLogin);
 
-}
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") tentarLogin();
+    });
+  }
 
+  function tentarLogin() {
+    const usuario = usuarioInput.value.trim();
+    const senha = senhaInput.value.trim();
 
-// // =========================
-// // FUNÇÃO: login chato
-// // =========================
-const usuarioInput = document.getElementById('usuario');
-const senhaInput = document.getElementById('senha');
-const entrarBtn = document.getElementById('entrarBtn');
-const msg = document.getElementById('msg');
-const overlay = document.getElementById('overlay_login');
-function tentarLogin() {
-  const usuario = usuarioInput.value.trim();
-  const senha = senhaInput.value.trim();
+    if (usuario === "admin" && senha === "admin") {
+      overlayLogin.style.display = "none";
+      return;
+    }
 
-  if (usuario === "admin" && senha === "admin") {
-    overlay.style.display = "none";
-  } else {
     msg.textContent = "Tente aquele login padrão do seu roteador";
   }
-}
 
-entrarBtn.addEventListener('click', tentarLogin);
+  // ============================================
+  // POPUP / SPAM CHAT0
+  // ============================================
+  function configurarPopupChato() {
+    searchBox.addEventListener("click", () => {
+      if (!modoSabotado || bannerActivated) return;
 
-// Permitir tecla Enter
-document.addEventListener('keydown', function (e) {
-  if (e.key === "Enter") {
-    tentarLogin();
+      const rect = searchBox.getBoundingClientRect();
+      posicionarBanner(rect);
+
+      spamBanner.style.display = "flex";
+      overlayPopup.style.display = "block";
+      bannerActivated = true;
+    });
+
+    spamBanner.addEventListener("click", () => {
+      window.open(
+        "https://lista.mercadolivre.com.br/ratoeiras#D[A:ratoeiras]",
+        "_blank"
+      );
+      closeBtn.style.display = "block";
+    });
+
+    closeBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      spamBanner.style.display = "none";
+      overlayPopup.style.display = "none";
+    });
   }
-});
 
-// =========================
-// FUNÇÃO: popup chato
-// =========================
-const searchBox = document.getElementById("search-box");
-const spamBanner = document.getElementById("spam-banner");
-const overlay_popup = document.getElementById("overlay_popup");
-const closeBtn = document.getElementById("close-banner");
+  function posicionarBanner(rect) {
+    const largura = rect.width * 1.5;
 
-let bannerActivated = false;
-
-// Primeira vez que o usuário clica na região e se estiver no modo sabotado
-searchBox.addEventListener("click", function () {
-  if (!bannerActivated && modoSabotado === true) {
-    const rect = searchBox.getBoundingClientRect();
-
-    spamBanner.style.width = 1.5 * rect.width + "px";
+    spamBanner.style.width = largura + "px";
     spamBanner.style.top = rect.top + "px";
-    const bannerLeft = (window.innerWidth - 1.5 * rect.width) / 2;
-    spamBanner.style.left = bannerLeft + "px";
-    spamBanner.style.display = "flex";
-    overlay_popup.style.display = "block";
-
-    bannerActivated = true;
+    spamBanner.style.left = (window.innerWidth - largura) / 2 + "px";
   }
-});
 
 
-spamBanner.addEventListener("click", function () {
-  window.open("https://lista.mercadolivre.com.br/ratoeiras#D[A:ratoeiras]", "_blank");
-  window.focus();
-  closeBtn.style.display = "block";
-});
-
-closeBtn.addEventListener("click", function (event) {
-  event.stopPropagation(); // não dispara o clique do banner
-  spamBanner.style.display = "none";
-  overlay_popup.style.display = "none";
-});
-
-// =========================
+  init();
+})();
