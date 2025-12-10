@@ -7,7 +7,7 @@ const idMissao = localStorage.getItem("idMissao")
 const overlayLogin = document.getElementById("overlay_login");
 const overlayPopup = document.getElementById("overlay_popup");
 
-// Se o site NÃO está sabotado, esconder login e popup
+
 if (!modoSabotado) {
 
 
@@ -44,81 +44,7 @@ document.getElementById("descricao-toggle").addEventListener("click", () => {
   }
 });
 
-// =========================
-// CLASSE: Banner
-// =========================
-class Banner {
-  constructor({ imagens = [], formato = "jpeg", qtdPontos = 3 }) {
-    this.imagens = imagens;
-    this.formato = formato;
-    this.qtdPontos = qtdPontos;
-    this._updateFn = null;
-  }
 
-  render() {
-    const section = document.createElement("section");
-    section.classList.add("banner");
-
-    const imgId = `banner-img-${Math.random().toString(36).slice(2, 9)}`;
-
-    section.innerHTML = `
-      <img id="${imgId}" loading="lazy" alt="">
-      <div class="dots">
-        ${Array.from({ length: this.qtdPontos }).map((_, i) =>
-      `<span class="dot${i === 0 ? " active" : ""}"></span>`
-    ).join("")}
-      </div>
-    `;
-
-    const imgEl = section.querySelector(`#${imgId}`);
-    if (!imgEl) return section;
-
-    // função que escolhe qual imagem usar com base na largura/altura da janela
-    const pickSrc = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      // prioridades: portrait mobile -> 480x640; else escolha por larguras
-      if (w <= 480 || h > w) return (this.imagens[0] || this.imagens[1] || this.imagens[2] || this.imagens[3] || this.imagens[4])?.path + `.${this.formato}`;
-      if (w <= 800) return (this.imagens[1] || this.imagens[2] || this.imagens[3] || this.imagens[4])?.path + `.${this.formato}`;
-      if (w <= 1200) return (this.imagens[2] || this.imagens[3] || this.imagens[4])?.path + `.${this.formato}`;
-      if (w <= 1920) return (this.imagens[3] || this.imagens[4])?.path + `.${this.formato}`;
-      return (this.imagens[4] || this.imagens[3] || this.imagens[2])?.path + `.${this.formato}`;
-    };
-
-    const update = () => {
-      const src = pickSrc() || "";
-      if (!src) return;
-      if (imgEl.getAttribute("src") !== src) {
-        imgEl.setAttribute("src", src);
-        imgEl.setAttribute("alt", src.split("/").pop() || "");
-      }
-    };
-
-    // guarda referência para possível remoção futura
-    this._updateFn = update;
-
-    // define inicialmente e adiciona listeners para atualizar ao redimensionar/rotacionar
-    update();
-    window.addEventListener("resize", update);
-    window.addEventListener("orientationchange", update);
-
-    return section;
-  }
-}
-
-const meuBanner = new Banner({
-  imagens: [
-    { path: "../images/Banners/banner-480x640", width: 480 },
-    { path: "../images/Banners/banner-800x450", width: 800 },
-    { path: "../images/Banners/banner-1200x800", width: 1200 },
-    { path: "../images/Banners/banner-1920x600", width: 1920 },
-    { path: "../images/Banners/banner-3440x900", width: 3440 }
-  ],
-  formato: "jpg",
-  qtdPontos: 4
-});
-
-document.getElementById("banner-area").appendChild(meuBanner.render());
 
 // Tenta carregar do JSON externo (agora na pasta pai)
 fetch("../produtos.json")

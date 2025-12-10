@@ -52,7 +52,17 @@
   <div id="descricao-area">
     <p id="descricao-tarefa"></p>
   </div>
-  <section id="banner-area"></section>
+  <section id="banner-area" class="banner">
+    <h2 class="hidden">Banner</h2>
+
+    <picture>
+      <source srcset="../images/Banners/banner-480x640.jpg" media="(max-width: 480px), (orientation: portrait)">
+      <source srcset="../images/Banners/banner-800x450.jpg" media="(max-width: 800px)">
+      <source srcset="../images/Banners/banner-1200x800.jpg" media="(max-width: 1200px)">
+      <source srcset="../images/Banners/banner-1920x600.jpg" media="(max-width: 1920px)">
+      <img src="../images/Banners/banner-3440x900.jpg" alt="home banner">
+    </picture>
+  </section>
   <section id="produtos-grid"></section>
 
   <footer id="footer"></footer>
