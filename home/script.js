@@ -28,22 +28,17 @@ if (!modoSabotado) {
 
 definirDescricao()
 
-// =========================
-// DESCRIÇÃO - BOTÃO DE OLHO
-// =========================
 
 const descricaoArea = document.getElementById("descricao-area");
 const eyeIcon = document.getElementById("eye-icon");
 
 document.getElementById("descricao-toggle").addEventListener("click", () => {
   const visivel = descricaoArea.classList.contains("visible");
-  
+
   if (visivel) {
-    // esconder
     descricaoArea.classList.remove("visible");
     eyeIcon.src = "../images/eye-open.png";
   } else {
-    // mostrar
     descricaoArea.classList.add("visible");
     eyeIcon.src = "../images/eye-closed.png";
   }
@@ -70,8 +65,8 @@ class Banner {
       <img id="${imgId}" loading="lazy" alt="">
       <div class="dots">
         ${Array.from({ length: this.qtdPontos }).map((_, i) =>
-          `<span class="dot${i === 0 ? " active" : ""}"></span>`
-        ).join("")}
+      `<span class="dot${i === 0 ? " active" : ""}"></span>`
+    ).join("")}
       </div>
     `;
 
@@ -168,7 +163,7 @@ function renderizarProdutos(lista) {
   //alterado para a home exibir menos itens de maneira mais aleatória
   const selecionados = [];
 
-  const startRandom = Math.floor(Math.random() * 31); 
+  const startRandom = Math.floor(Math.random() * 31);
   const start = lista.length > 0 ? startRandom % lista.length : 0;
   // 18 fica ok em desktops maximizados, e em telas mais estreitas serve para demonstrar a responsividade
   for (let i = start; selecionados.length < 18 && i < lista.length; i += 5) {
@@ -195,9 +190,6 @@ function renderizarProdutos(lista) {
 
 }
 
-
-const meuFooter = new Footer();
-document.getElementById("footer").appendChild(meuFooter.render());
 
 // // =========================
 // // FUNÇÃO: login chato
@@ -253,14 +245,13 @@ searchBox.addEventListener("click", function () {
   }
 });
 
-// Ao clicar no banner -> abre o "link de spam"
+
 spamBanner.addEventListener("click", function () {
   window.open("https://lista.mercadolivre.com.br/ratoeiras#D[A:ratoeiras]", "_blank");
   window.focus();
   closeBtn.style.display = "block";
 });
 
-// Ao clicar no X -> fecha e nunca mais mostra
 closeBtn.addEventListener("click", function (event) {
   event.stopPropagation(); // não dispara o clique do banner
   spamBanner.style.display = "none";

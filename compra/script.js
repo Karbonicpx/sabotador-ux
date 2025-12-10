@@ -1,5 +1,5 @@
 // Carrega os itens do carrinho na página de checkout
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     carregarItensCarrinho();
     configurarMetodoPagamento();
 });
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function carregarItensCarrinho() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const orderItems = document.getElementById('order-items');
-    
+
     if (cartItems.length === 0) {
         orderItems.innerHTML = '<p>Carrinho vazio</p>';
         document.getElementById('subtotal').textContent = 'R$ 0,00';
@@ -15,27 +15,27 @@ function carregarItensCarrinho() {
         document.getElementById('total-pedido').textContent = 'R$ 0,00';
         return;
     }
-    
+
     let subtotal = 0;
     let html = '';
-    
+
     cartItems.forEach(item => {
         // Garante que o preço é um número válido
         const preco = parsePrice(item.precoNum || item.preco);
         const quantidade = item.quantidade || 1;
         const itemTotal = preco * quantidade;
         subtotal += itemTotal;
-        
+
         // Gerar placeholder se não tiver imagem
         const thumbText = getThumbText(item.nome);
-        
+
         html += `
             <div class="order-item">
                 <div class="order-item-img">
-                    ${item.imagem ? 
-                        `<img src="${item.imagem}" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=&quot;img-placeholder&quot;>${thumbText}</div>'">` : 
-                        `<div class="img-placeholder">${thumbText}</div>`
-                    }
+                    ${item.imagem ?
+                `<img src="${item.imagem}" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=&quot;img-placeholder&quot;>${thumbText}</div>'">` :
+                `<div class="img-placeholder">${thumbText}</div>`
+            }
                 </div>
                 <div class="order-item-content">
                     <p><strong>${escapeHtml(item.nome)}</strong></p>
@@ -46,12 +46,12 @@ function carregarItensCarrinho() {
             </div>
         `;
     });
-    
+
     orderItems.innerHTML = html;
-    
+
     const taxaEntrega = 8.00;
     const total = subtotal + taxaEntrega;
-    
+
     document.getElementById('subtotal').textContent = `R$ ${formatCurrency(subtotal)}`;
     document.getElementById('taxa-entrega').textContent = `R$ ${formatCurrency(taxaEntrega)}`;
     document.getElementById('total-pedido').textContent = `R$ ${formatCurrency(total)}`;
@@ -63,7 +63,7 @@ function parsePrice(price) {
     if (typeof price === 'number' && !isNaN(price)) {
         return price;
     }
-    
+
     // Se é string, faz a conversão
     if (typeof price === 'string') {
         const cleaned = price
@@ -72,11 +72,11 @@ function parsePrice(price) {
             .replace(/\./g, '')  // Remove pontos de milhar
             .replace(',', '.')   // Converte vírgula decimal para ponto
             .trim();
-        
+
         const result = parseFloat(cleaned);
         return isNaN(result) ? 0 : result;
     }
-    
+
     // Se não é número nem string, retorna 0
     return 0;
 }
@@ -123,7 +123,3 @@ function confirmarCompra() {
     localStorage.removeItem('carrinho'); // Limpa também o carrinho original se existir
     window.location.href = "../home/index.html"; // Volta para home
 }
-
-
-const meuFooter = new Footer();
-document.getElementById("footer").appendChild(meuFooter.render());

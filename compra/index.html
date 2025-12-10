@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,8 +15,7 @@
             <img src="../images/logo.png" alt="store logo" />
         </a>
         <div class="navbar_icons">
-            <img class="icon" id="loginBtn" src="../images/User_logo.svg" alt="user icon"
-        />
+            <img class="icon" id="loginBtn" src="../images/User_logo.svg" alt="user icon" />
             <a href="../checkout/index.html" class="icon">
                 <img src="../images/checkout.svg" alt="checkout icon" />
             </a>
@@ -23,24 +23,25 @@
     </header>
 
     <div class="main-content">
-        
+
         <div class="form-column">
             <main class="checkout-container">
-               
+
                 <section class="checkout-box">
                     <h2>Entrega para {User}</h2>
                     <label class="lbl">Endereço de entrega</label>
                     <input type="text" placeholder="Digite o endereço completo..." class="input" />
                 </section>
 
-                
+
                 <section class="checkout-box">
                     <h2>Instruções de Entrega</h2>
                     <label class="lbl">Alguma instrução especial para a entrega?</label>
-                    <textarea class="textarea" placeholder="Ex: Deixar na portaria, não tocar campainha, entregar para vizinho, etc..."></textarea>
+                    <textarea class="textarea"
+                        placeholder="Ex: Deixar na portaria, não tocar campainha, entregar para vizinho, etc..."></textarea>
                 </section>
 
-                
+
                 <section class="checkout-box">
                     <h2>Método de Pagamento</h2>
                     <label class="lbl">Escolha o método</label>
@@ -51,7 +52,7 @@
                         <option value="boleto">Boleto</option>
                     </select>
 
-                    
+
                     <div id="pag-cartao" class="pagamento oculto">
                         <h3>Cartão de Crédito</h3>
                         <input type="text" placeholder="Número do cartão" class="input" />
@@ -62,20 +63,20 @@
                         </div>
                     </div>
 
-                   
+
                     <div id="pag-pix" class="pagamento oculto">
                         <h3>Pix</h3>
                         <p>Pagamento via Pix - código será gerado após confirmação</p>
                     </div>
 
-                   
+
                     <div id="pag-boleto" class="pagamento oculto">
                         <h3>Boleto</h3>
                         <p>Boleto será gerado após confirmação do pedido</p>
                     </div>
                 </section>
 
-               
+
                 <button class="btn-comprar" onclick="confirmarCompra()">Confirmar Compra</button>
             </main>
         </div>
@@ -99,5 +100,7 @@
 
     <footer id="footer"></footer>
     <script src="script.js"></script>
+    <script src="../global.js"></script>
 </body>
+
 </html>

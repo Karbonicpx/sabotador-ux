@@ -104,8 +104,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     renderizarProdutos(filtrados);
   }
-  const meuFooter = new Footer();
-  document.getElementById("footer").appendChild(meuFooter.render());
 
 
   function getParametro(nome) {

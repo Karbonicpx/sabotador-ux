@@ -91,23 +91,22 @@ function renderProducts() {
 // Remove produto do carrinho
 function removeFromCart(productId) {
     const modoSabotado = localStorage.getItem("modoSabotado");
-    if (modoSabotado === "true"||confirm('Tem certeza que deseja remover este produto do carrinho?')) {
+    if (modoSabotado === "true" || confirm('Tem certeza que deseja remover este produto do carrinho?')) {
         // Remove do array products
         products = products.filter(p => p.id !== productId);
-        
+
         // Atualiza o localStorage
         localStorage.setItem("carrinho", JSON.stringify(products));
-        
+
         // Re-renderiza os produtos
         renderProducts();
         updateTotal();
-        
-    // Mostra mensagem de feedback no modo normal        
-    if(modoSabotado === "false")
-    {
-      showMessage('Produto removido do carrinho!');
-    }
-        
+
+        // Mostra mensagem de feedback no modo normal        
+        if (modoSabotado === "false") {
+            showMessage('Produto removido do carrinho!');
+        }
+
     }
 }
 
@@ -118,7 +117,7 @@ function showMessage(message) {
     if (existingMessage) {
         existingMessage.remove();
     }
-    
+
     const messageEl = document.createElement('div');
     messageEl.className = 'feedback-message';
     messageEl.textContent = message;
@@ -137,9 +136,9 @@ function showMessage(message) {
     messageEl.style.transition = "transform 1.2s ease"; // animação suave
 
     document.body.appendChild(messageEl);
-    
+
     setTimeout(() => {
-      messageEl.style.transform = "translateY(-150%)";
+        messageEl.style.transform = "translateY(-150%)";
     }, 200);
     setTimeout(() => {
         if (messageEl.parentNode) {
@@ -171,7 +170,7 @@ function updateQtyInCart(productId, newQty) {
         }));
 
         localStorage.setItem("carrinho", JSON.stringify(carrinhoAtualizado));
-        
+
         // Atualiza também o visual da quantidade no card
         const input = document.querySelector(`.qty[data-id="${productId}"] input`);
         if (input) {
@@ -221,7 +220,7 @@ function parsePrice(priceString) {
     if (typeof priceString === 'number') {
         return priceString;
     }
-    
+
     // Remove "R$", espaços, pontos (milhar) e converte vírgula (decimal) para ponto
     const cleaned = priceString
         .replace('R$', '')
@@ -229,7 +228,7 @@ function parsePrice(priceString) {
         .replace(/\./g, '')
         .replace(',', '.')
         .trim();
-    
+
     return parseFloat(cleaned) || 0;
 }
 
@@ -238,7 +237,7 @@ function finalizarTarefa() {
         alert("Seu carrinho está vazio. Adicione produtos antes de finalizar a compra.");
         return;
     }
-    
+
     // Pega os dados já atualizados do array products
     const updatedCartItems = products.map(p => ({
         id: p.id,
@@ -252,17 +251,14 @@ function finalizarTarefa() {
         marca: p.marca,
         cor: p.cor
     }));
-    
+
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
-    
+
     const fim = Date.now();
     localStorage.setItem("fimTarefa", fim);
-    
+
     window.location.href = "../compra/index.html";
 }
 
 // Renderiza tudo
 renderProducts();
-
-const meuFooter = new Footer();
-document.getElementById("footer").appendChild(meuFooter.render());

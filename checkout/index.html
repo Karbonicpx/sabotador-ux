@@ -1,64 +1,55 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>UX Sabotador</title>
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="../global.css" />
-  </head>
-  <body>
-    <header class="navbar">
-      <a href="../home/index.html" class="home_logo">
-        <img src="../images/logo.png" alt="store logo" />
-      </a>
 
-      <div class="search-bar">
-        <input
-          id="search-box"
-          type="text"
-          placeholder="Busque por produtos, marcas e muito mais..."
-          onkeydown="if(event.key === 'Enter') pesquisar()"
-        />
-        <button id="buscarBtn">
-          <img src="../images/search.svg" onclick="pesquisar()" alt="lupa" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>UX Sabotador</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../global.css" />
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="../home/index.html" class="home_logo">
+      <img src="../images/logo.png" alt="store logo" />
+    </a>
+
+    <div class="search-bar">
+      <input id="search-box" type="text" placeholder="Busque por produtos, marcas e muito mais..." />
+      <button id="buscarBtn">
+        <img src="../images/search.svg" alt="lupa" />
+      </button>
+    </div>
+
+    <div class="navbar_icons">
+      <img class="icon" id="loginBtn" src="../images/User_logo.svg" alt="user icon" />
+      <a href="../checkout/index.html" class="icon"><img src="../images/checkout.svg" alt="checkout icon" /></a>
+    </div>
+  </header>
+
+  <main>
+    <section id="checkout-area"></section>
+
+    <section id="order-summary">
+      <div class="summary-card">
+        <h3 class="summary-title">Resumo da compra</h3>
+
+        <div class="summary-row">
+          <span>Total</span>
+          <span class="total-amount" id="summary-total">R$ 0,00</span>
+        </div>
+
+        <button class="btn-primary" id="checkout-btn" onclick="finalizarTarefa()">
+          Continuar a compra
         </button>
       </div>
+    </section>
+  </main>
+  <footer id="footer"></footer>
+  <script src="../global.js"></script>
+  <script src="script.js"></script>
+</body>
 
-      <div class="navbar_icons">
-        <img class="icon" id="loginBtn" src="../images/User_logo.svg" alt="user icon"
-        />
-        <a href="../checkout/index.html" class="icon"
-          ><img src="../images/checkout.svg" alt="checkout icon"
-        /></a>
-      </div>
-    </header>
-
-    <main>
-      <section id="checkout-area"></section>
-
-      <section id="order-summary">
-        <div class="summary-card">
-          <h3 class="summary-title">Resumo da compra</h3>
-
-          <div class="summary-row">
-            <span>Total</span>
-            <span class="total-amount" id="summary-total">R$ 0,00</span>
-          </div>
-
-          <button
-            class="btn-primary"
-            id="checkout-btn"
-            onclick="finalizarTarefa()"
-          >
-            Continuar a compra
-          </button>
-        </div>
-      </section>
-    </main>
-    <script src="../global.js"></script>
-    <script src="script.js"></script>
-  </body>
 </html>
