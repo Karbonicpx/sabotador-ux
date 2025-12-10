@@ -21,6 +21,7 @@ function renderProducts() {
         card.className = 'product-card';
 
         card.innerHTML = `
+          <h2 class="hidden">Card-Carrinho</h2>
           <button class="delete-btn" data-id="${p.id}">×</button>
           
           <div class="product-thumb">
