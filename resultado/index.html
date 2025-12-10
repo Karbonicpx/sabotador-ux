@@ -10,23 +10,32 @@
 </head>
 
 <body>
-
     <main class="container">
         <h1>Resultados Finais</h1>
 
         <section class="modo">
             <h2>Modo Normal</h2>
-            <div id="resultados-normal"></div>
+            <div id="resultados-normal" class="resultados"></div>
             <div class="time" id="time-normal"></div>
         </section>
 
         <section class="modo sabotado">
             <h2>Modo Sabotado</h2>
-            <div id="resultados-sabotado"></div>
+            <div id="resultados-sabotado" class="resultados"></div>
             <div class="time" id="time-sabotado"></div>
         </section>
 
-        <button class="btn-voltar" id="btn-voltar">Voltar</button>
+        <div class="acoes">
+            <label for="btn-pdf" class="label-pdf">
+                Para saber mais sobre o trabalho e as sabotagens:
+            </label>
+
+            <a href="../relatorio.pdf" target="_blank" rel="noopener noreferrer" class="btn-pdf" id="btn-pdf">
+                Abrir PDF
+            </a>
+
+            <button class="btn-voltar" id="btn-voltar">Voltar</button>
+        </div>
     </main>
 
     <script src="scripts.js"></script>
