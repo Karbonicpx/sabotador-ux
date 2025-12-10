@@ -1,70 +1,153 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const btnNormal = document.getElementById("btn-normal");
-    const btnSabotado = document.getElementById("btn-sabotado");
+    const btnIniciar = document.getElementById("btn-iniciar-teste");
+    const modal = document.getElementById("modal-teste");
 
-    btnNormal.addEventListener("click", () => {
+    const fase1 = document.querySelector('[data-fase="1"]');
+    const fase2 = document.querySelector('[data-fase="2"]');
+
+    btnIniciar.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+        iniciarFase1();
+    });
+
+    btnFase1 = document.getElementById("btn-fase-1");
+    btnFase1.addEventListener("click", () => {
         iniciarTarefaNormal();
     });
-
-    btnSabotado.addEventListener("click", () => {
+    btnFase2 = document.getElementById("btn-fase-2");
+    btnFase2.addEventListener("click", () => {
         iniciarTarefaSabotada();
     });
-});
 
+    window.addEventListener("storage", (event) => {
+        if (event.key === "fimTarefa1") {
+            concluirFase1();
+        }
 
-let intervaloTempo;
+        if (event.key === "fimTarefa2") {
+            concluirFase2();
+        }
+    });
 
-function iniciarTarefaSabotada() {
-    const inicio = Date.now();
-    localStorage.setItem("inicioTarefa2", inicio);
-    setModoSabotagem(true)
+    function iniciarFase1() {
+        setModoSabotagem(false);
+        localStorage.setItem("inicioTarefa1", Date.now());
+    }
 
+    function concluirFase1() {
+        fase1.classList.add("hidden");
+        fase2.classList.remove("hidden");
 
+        setModoSabotagem(true);
+        localStorage.setItem("inicioTarefa2", Date.now());
+    }
 
-    const time = document.getElementById("tempoTarefa2");
-    time.textContent = "00:00";
-
-
-    if (intervaloTempo) clearInterval(intervaloTempo);
-
-    intervaloTempo = setInterval(() => {
-        const agora = Date.now();
-        const inicioSalvo = Number(localStorage.getItem("inicioTarefa2"));
-
-        const decorrido = Math.floor((agora - inicioSalvo) / 1000);
-        const minutos = Math.floor(decorrido / 60).toString().padStart(2, "0");
-        const segundos = (decorrido % 60).toString().padStart(2, "0");
-
-        time.textContent = `${minutos}:${segundos}`;
-    }, 1000);
-}
-
-function iniciarTarefaNormal() {
-    const inicio = Date.now();
-    localStorage.setItem("inicioTarefa1", inicio);
-    setModoSabotagem(false)
-
-
-
-    const time = document.getElementById("tempoTarefa1");
-    time.textContent = "00:00";
-
-}
-
-window.addEventListener("storage", (event) => {
-    if (event.key === "fimTarefa") {
-        const inicio = Number(localStorage.getItem("inicioTarefa2"));
-        const fim = Number(event.newValue);
-        const duracao = ((fim - inicio) / 1000).toFixed(2);
-        const time = document.getElementById("tempoTarefa2");
-
-        const minutes = Math.floor(duracao / 60).toString().padStart(2, '0');
-        const seconds = (duracao % 60).toFixed(0).toString().padStart(2, '0');
-        time.textContent = `${minutes}:${seconds}`;
-        if (intervaloTempo) clearInterval(intervaloTempo);
+    function concluirFase2() {
+        modal.classList.add("hidden");
+        alert("Teste concluído. Obrigado pela participação!");
     }
 });
 
 function setModoSabotagem(isSabotado) {
     localStorage.setItem("modoSabotado", isSabotado ? "true" : "false");
 }
+
+
+let intervaloTempo = null;
+
+
+function iniciarTarefaNormal() {
+    iniciarTarefa({
+        keyInicio: "inicioTarefa1",
+        tempoElementId: "tempoTarefa1",
+        sabotado: false,
+        iniciarTimer: true
+    });
+}
+
+function iniciarTarefaSabotada() {
+    iniciarTarefa({
+        keyInicio: "inicioTarefa2",
+        tempoElementId: "tempoTarefa2",
+        sabotado: true,
+        iniciarTimer: true
+    });
+}
+
+
+function iniciarTarefa({ keyInicio, tempoElementId, sabotado, iniciarTimer }) {
+    salvarInicio(keyInicio);
+    setModoSabotagem(sabotado);
+    resetarTempo(tempoElementId);
+    console.log("Tarefa iniciada:", keyInicio, "Sabotado:", sabotado);
+    if (iniciarTimer) {
+        iniciarCronometro(keyInicio, tempoElementId);
+    } else {
+        pararCronometro();
+    }
+}
+
+
+function iniciarCronometro(keyInicio, tempoElementId) {
+    pararCronometro();
+    console.log("Iniciando cronômetro para", keyInicio);
+    intervaloTempo = setInterval(() => {
+        const inicio = obterInicio(keyInicio);
+        if (!inicio) return;
+
+        atualizarTempo(tempoElementId, Date.now() - inicio);
+    }, 1000);
+}
+
+function pararCronometro() {
+    if (intervaloTempo) {
+        clearInterval(intervaloTempo);
+        intervaloTempo = null;
+    }
+}
+
+
+function salvarInicio(key) {
+    localStorage.setItem(key, Date.now());
+}
+
+function obterInicio(key) {
+    return Number(localStorage.getItem(key));
+}
+
+function setModoSabotagem(isSabotado) {
+    localStorage.setItem("modoSabotado", isSabotado ? "true" : "false");
+}
+
+function resetarTempo(elementId) {
+    const el = document.getElementById(elementId);
+    if (el) el.textContent = "00:00";
+}
+
+function atualizarTempo(elementId, milissegundos) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    const segundosTotais = Math.floor(milissegundos / 1000);
+    const minutos = Math.floor(segundosTotais / 60)
+        .toString()
+        .padStart(2, "0");
+    const segundos = (segundosTotais % 60)
+        .toString()
+        .padStart(2, "0");
+
+    el.textContent = `${minutos}:${segundos}`;
+}
+
+
+
+window.addEventListener("storage", (event) => {
+    if (event.key !== "fimTarefa") return;
+
+    const inicio = obterInicio("inicioTarefa2");
+    if (!inicio) return;
+
+    const duracao = Number(event.newValue) - inicio;
+    atualizarTempo("tempoTarefa2", duracao);
+    pararCronometro();
+});

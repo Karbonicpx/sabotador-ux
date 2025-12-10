@@ -1,151 +1,178 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sobre - Sabotadores U/X</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Sabotadores U/X</h1>
-      <p class="subtitle">
-        Um experimento sobre o impacto da má experiência do usuário (UX)
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre - Sabotadores U/X</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Sabotadores U/X</h1>
+    <p class="subtitle">
+      Um experimento sobre o impacto da má experiência do usuário (UX)
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Resumo</h2>
+      <p>
+        O projeto <strong>Sabotadores U/X</strong> foi desenvolvido com o
+        objetivo de analisar e demonstrar, de forma prática, como o mau uso
+        dos princípios de experiência do usuário (UX) pode afetar
+        negativamente a navegação em um site. O trabalho envolve a criação de
+        um e-commerce com defeitos propositais de usabilidade, contrastado com
+        uma versão funcional e otimizada, para evidenciar os impactos do
+        design ruim sobre a interação e a satisfação do usuário.
       </p>
-    </header>
+    </section>
 
-    <main>
-      <section>
-        <h2>Resumo</h2>
-        <p>
-          O projeto <strong>Sabotadores U/X</strong> foi desenvolvido com o
-          objetivo de analisar e demonstrar, de forma prática, como o mau uso
-          dos princípios de experiência do usuário (UX) pode afetar
-          negativamente a navegação em um site. O trabalho envolve a criação de
-          um e-commerce com defeitos propositais de usabilidade, contrastado com
-          uma versão funcional e otimizada, para evidenciar os impactos do
-          design ruim sobre a interação e a satisfação do usuário.
-        </p>
-      </section>
+    <section>
+      <h2>Descrição do Projeto</h2>
+      <p>
+        O projeto consiste em um protótipo de site de compras que simula um
+        fluxo tradicional de e-commerce — login, página inicial, busca,
+        produto, carrinho e finalização. Entretanto, na versão sabotadora,
+        foram incluídos erros intencionais, como botões confusos, ausência de
+        feedback e cores inapropriadas, tornando a navegação desconfortável.
+      </p>
+      <p>
+        Paralelamente, uma segunda versão com boas práticas de UX foi criada,
+        permitindo comparar a diferença de experiência entre ambas as
+        abordagens e reforçar a importância de um design centrado no usuário.
+      </p>
+    </section>
 
-      <section>
-        <h2>Descrição do Projeto</h2>
-        <p>
-          O projeto consiste em um protótipo de site de compras que simula um
-          fluxo tradicional de e-commerce — login, página inicial, busca,
-          produto, carrinho e finalização. Entretanto, na versão sabotadora,
-          foram incluídos erros intencionais, como botões confusos, ausência de
-          feedback e cores inapropriadas, tornando a navegação desconfortável.
-        </p>
-        <p>
-          Paralelamente, uma segunda versão com boas práticas de UX foi criada,
-          permitindo comparar a diferença de experiência entre ambas as
-          abordagens e reforçar a importância de um design centrado no usuário.
-        </p>
-      </section>
+    <section>
+      <h2>Descrição do Site</h2>
+      <p>
+        O site é um mockup de e-commerce que representa elementos comuns de
+        plataformas como Mercado Livre ou AliExpress, mas com ajustes
+        propositais que atrapalham a navegação. As principais páginas incluem:
+      </p>
+      <ul>
+        <li>Página inicial com barra de busca e banners promocionais;</li>
+        <li>Página de produto com opções de cor, tamanho e avaliação;</li>
+        <li>Carrinho de compras com controle de quantidade;</li>
+        <li>
+          Tela de login e de finalização da compra.
+          (Ainda não implementado)
+          </span>
+        </li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2>Iniciar teste</h2>
 
-      <section>
-        <h2>Descrição do Site</h2>
-        <p>
-          O site é um mockup de e-commerce que representa elementos comuns de
-          plataformas como Mercado Livre ou AliExpress, mas com ajustes
-          propositais que atrapalham a navegação. As principais páginas incluem:
-        </p>
-        <ul>
-          <li>Página inicial com barra de busca e banners promocionais;</li>
-          <li>Página de produto com opções de cor, tamanho e avaliação;</li>
-          <li>Carrinho de compras com controle de quantidade;</li>
-          <li>
-            Tela de login e de finalização da compra.
-              (Ainda não implementado)
-            </span>
-          </li>
-        </ul>
-      </section>
-      <section class="card">
-        <h2>Iniciar teste</h2>
+      <div class="alert">
+        <strong>Aviso:</strong> Este teste tem o objetivo de
+        <strong>avaliar sua experiência de uso</strong> em duas plataformas —
+        uma com falhas de UX propositalmente inseridas e outra desenvolvida
+        seguindo boas práticas de usabilidade.
+      </div>
 
-        <div class="alert">
-          <strong>Aviso:</strong> Este teste tem o objetivo de
-          <strong>avaliar sua experiência de uso</strong> em duas plataformas —
-          uma com falhas de UX propositalmente inseridas e outra desenvolvida
-          seguindo boas práticas de usabilidade. Ao prosseguir, você estará
-          participando de um experimento observacional de comportamento de
-          navegação.
-        </div>
+      <button id="btn-iniciar-teste" class="btn-sabotado">
+        Iniciar teste
+      </button>
+    </section>
+  </main>
+  <footer>
+    <p>Projeto desenvolvido para a disciplina de Padrões Web - UTFPR</p>
+    <p>Licença Creative Commons © 2025</p>
+  </footer>
+  <div id="modal-teste" class="modal hidden">
+    <div class="modal-content">
+
+      <section class="fase" data-fase="1">
+        <h2>Fase 1 — Sem sabotagem</h2>
+
+        <p>
+          Nesta fase, utilize a plataforma <strong>sem falhas de UX</strong>.
+          Leia atentamente as missões abaixo e realize-as na ordem indicada.
+        </p>
 
         <div class="mission">
-          <h3>Missão do teste</h3>
-          <ul>
-            <li>Realizar login;</li>
+          <h3>Missões</h3>
+          <ol>
             <li>
-              Comprar <strong>2 mouses</strong>;
+              Verifique <strong>quantos mouses da Logitech</strong> possuem
+              <strong>preço superior a R$ 200,00</strong>.
             </li>
             <li>
-              Comprar <strong>3 teclados</strong>;
-                (Ainda não obrigatório)
-              </span>
+              Realize a compra da seguinte lista:
+              <ul>
+                <li>Mouse — 2 unidades</li>
+                <li>Teclado — 3 unidades</li>
+                <li>Headset — 1 unidade</li>
+              </ul>
             </li>
-            <li>Finalizar o pagamento.</li>
-          </ul>
+
+            <li>
+              Finalize a compra utilizando <strong>cartão de crédito</strong>.
+            </li>
+          </ol>
         </div>
 
-        <div class="links">
-          <section class="fase-container">
-            <div class="fase-conteudo">
-              <h2>Primeira Fase</h2>
-              <p>
-                Este é o teste <strong>sem sabotagem</strong>. Seu objetivo é
-                realizar as tarefas conforme indicado.
-              </p>
+        <a href="../home/index.html" target="_blank" class="btn-sabotado" id="btn-fase-1">
+          Iniciar Fase 1
+        </a>
 
-              <a
-                href="../home/index.html"
-                target="_blank"
-                class="btn-sabotado"
-                id="btn-normal"
-              >
-                Acessar site <strong>sem Sabotagem</strong>
-              </a>
-
-              <div class="tempo-container">
-                <span class="tempo-label">Tempo decorrido:</span>
-                <span id="tempoTarefa1" class="tempo-valor">00:00</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="fase-container">
-            <div class="fase-conteudo">
-              <h2>Segunda Fase</h2>
-              <p>
-                Este é o teste <strong>sabotado</strong>. Seu objetivo é
-                realizar as tarefas conforme indicado.
-              </p>
-
-              <a
-                href="../home/index.html"
-                target="_blank"
-                class="btn-sabotado"
-                id="btn-sabotado"
-              >
-                Acessar site <strong>Sabotado</strong>
-              </a>
-
-              <div class="tempo-container">
-                <span class="tempo-label">Tempo decorrido:</span>
-                <span id="tempoTarefa2" class="tempo-valor">00:00</span>
-              </div>
-            </div>
-          </section>
+        <div class="tempo-container">
+          <span>Tempo decorrido:</span>
+          <span id="tempoTarefa1">00:00</span>
         </div>
       </section>
-    </main>
 
-    <footer>
-      <p>Projeto desenvolvido para a disciplina de Padrões Web - UTFPR</p>
-      <p>Licença Creative Commons © 2025</p>
-    </footer>
-    <script src="script.js"></script>
-  </body>
+      <!-- FASE 2 -->
+      <section class="fase hidden" data-fase="2">
+        <h2>Fase 2 — Interface Sabotada</h2>
+
+        <p>
+          Nesta fase, as mesmas tarefas deverão ser realizadas em uma interface
+          com <strong>falhas propositalmente inseridas</strong>. O objetivo é
+          observar o impacto dessas falhas na sua experiência.
+        </p>
+
+        <div class="mission">
+          <h3>Missões</h3>
+          <ol>
+            <li>
+              Verifique <strong>quantos mouses da Logitech</strong> possuem
+              <strong>preço superior a R$ 200,00</strong>.
+            </li>
+
+            <li>
+              Realize a compra da mesma lista:
+              <ul>
+                <li>Mouse — 2 unidades</li>
+                <li>Teclado — 3 unidades</li>
+                <li>Headset — 1 unidade</li>
+              </ul>
+            </li>
+
+            <li>
+              Finalize a compra utilizando <strong>cartão de crédito</strong>.
+            </li>
+          </ol>
+        </div>
+
+        <a href="../home/index.html" target="_blank" class="btn-sabotado" id="btn-fase-2">
+          Iniciar Fase 2
+        </a>
+
+        <div class="tempo-container">
+          <span>Tempo decorrido:</span>
+          <span id="tempoTarefa2">00:00</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
